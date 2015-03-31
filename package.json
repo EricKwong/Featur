@@ -15,5 +15,14 @@
   "bugs": {
     "url": "https://github.com/EricKwong/chronos/issues"
   },
-  "homepage": "https://github.com/EricKwong/chronos"
+  "homepage": "https://github.com/EricKwong/chronos",
+  "dependencies": {
+    "body-parser": "^1.12.2",
+    "express": "^4.12.3",
+    "morgan": "^1.5.2",
+    "pg": "^4.3.0",
+    "pg-hstore": "^2.3.2",
+    "request": "^2.54.0",
+    "sequelize": "^2.0.5"
+  }
 }
