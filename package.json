@@ -1,0 +1,19 @@
+{
+  "name": "featr",
+  "version": "1.0.0",
+  "description": "artists collaborator app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EricKwong/chronos"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EricKwong/chronos/issues"
+  },
+  "homepage": "https://github.com/EricKwong/chronos"
+}
