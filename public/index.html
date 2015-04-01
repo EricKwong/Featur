@@ -10,7 +10,7 @@
   <script src="http://backbonejs.org/backbone-min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
 
-  <!-- js Scripts -->
+  <!-- JS Scripts -->
   <script src='js/app.js'></script>
   <script src='js/models/main_artist.js'></script>
   <script src='js/models/collab_artist.js'></script>
@@ -28,21 +28,28 @@
     <hr>
     <input name='search-input' type="text">
     <button id='search-button'></button>
+    <hr>
   </header>
 
-<!-- MAIN ARTIST SEARCH RESULTS-->
-  <section id='#main-artist-search-results'></section>
+<!-- MAIN WINDOW-->
+  <section id='main-artist-search-results'></section>
   
-<!-- Main Window -->
-  <section id='#main-artist-container'></section>
-  <section id='#collab-artist-container'></section>
+  <section id='artists-container'>
+    <div id='main-artist-container'></div>
+    <div id='collab-artist-container'></div>   
+  </section>
+
 
 <!-- TEMPLATES -->
 <!-- Main Artist -->
-  <template id='main-artist-template'></template>
+  <template id='main-artist-template'>
+    
+  </template>
 
 <!-- Collab Artist -->
-  <template id='collab-artist-template'></template>
+  <template id='collab-artist-template'>
+    
+  </template>
 
 
 </body>
