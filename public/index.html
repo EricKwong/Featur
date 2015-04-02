@@ -24,21 +24,23 @@
 </head>
 <body>
   
-  <header>
-    <h1>featr</h1>
-    <hr>
-    <input name='search-input' type='text' placeholder='Artist...'>
-    <button id='search-button'>Search</button>
-    <hr>
-  </header>
+  <div id='main-container'>
+    <header>
+      <h1>featr</h1>
+      <hr>
+      <input name='search-input' type='text' placeholder='Artist...'>
+      <button id='search-button'>Search</button>
+      <hr>
+    </header>
 
-<!-- MAIN WINDOW-->
-  <section id='main-artist-search-results'></section>
-  
-  <section id='artists-container'>
-    <div id='main-artist-container'></div>
-    <div id='collab-artist-container'></div>   
-  </section>
+  <!-- MAIN WINDOW-->
+    <section id='main-artist-search-results'></section>
+    
+    <section id='artists-container'>
+      <div id='main-artist-container'></div>
+      <div id='collab-artist-container'></div>   
+    </section>
+  </div>
 
 <!-- TEMPLATES -->
 <!-- Main Artist -->
@@ -46,6 +48,15 @@
     <div class='main-artist' data-artistId='{{artistId}}'>
       <img src='{{imageUrl}}' alt='{{name}}'>
       <h2 class='name'>{{name}}</h2>
+    </div>
+  </template>
+
+  <!-- Main Artist Selection -->
+  <template id='main-artist-selection-template'>
+    <div class='main-artist-selection'>
+      <ul>
+        <li>{{name}}</li>
+      </ul>
     </div>
   </template>
 
