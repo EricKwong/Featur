@@ -22,9 +22,9 @@ router.get('/:artist', function (req, res) {
             };
 
             var artistData = {
-                name: artist.name,
-                artist_id: artist.id,
-                image: undefinedCheck(imageUrl)
+                artistName: artist.name,
+                artistId: artist.id,
+                artistImg: undefinedCheck(imageUrl)
             };
 
             return artistData;
