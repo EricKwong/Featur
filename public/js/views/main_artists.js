@@ -4,4 +4,5 @@ App.Views.MainArtists = Backbone.View.extend({
   initialize: function() {
     console.log('Created: MainArtists Coll View');
   }
+  url: '/search_artists/beyonce'
 });
