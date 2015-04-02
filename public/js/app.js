@@ -7,6 +7,4 @@ var App = {
 $(function() {
   console.log('Loaded: app.js');
 
-  // App.searchResultsView = new App.View.
-
 });
