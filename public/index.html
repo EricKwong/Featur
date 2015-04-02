@@ -45,7 +45,7 @@
 <!-- TEMPLATES -->
 <!-- Main Artist -->
   <template id='main-artist-template'>
-    <div class='main-artist' data-artistId='{{artistId}}'>
+    <div class='main-artist' data-artist-id='{{artistId}}'>
       <img src='{{artistImg}}' alt='{{artistName}}'>
       <h2 class='name'>{{artistName}}</h2>
     </div>
@@ -53,21 +53,19 @@
 
   <!-- Main Artist Selection -->
   <template id='main-artist-selection-template'>
-    <div class='main-artist-selection'>
-      <ul>
-        <li>{{artistName}}</li>
-      </ul>
+    <div class='main-artist-selection' data-artist-id='{{artistId}}' data-artist-img='{{artistImg}}'>
+      {{artistName}}
     </div>
   </template>
 
 <!-- Collab Artist -->
   <template id='collab-artist-template'>
-    <div class='collab-artist' data-artistId='{{artistId}}'>
+    <div class='collab-artist' data-artist-id='{{artistId}}'>
       <img src='{{artistImg}}' alt='{{artistName}}'>
       <h2 class='name'>{{artistName}}</h2>
       <ul class='track-list'>
         {{#each track}}
-          <li data-trackId='{{trackId}}' data-trackUri='{{trackUri}}'>{{trackName}}</li>
+          <li data-track-id='{{trackId}}' data-track-uri='{{trackUri}}'>{{trackName}}</li>
         {{/each}} 
       </ul>
     </div>
