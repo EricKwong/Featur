@@ -20,7 +20,11 @@ App.Views.MainArtists = Backbone.View.extend({
   },
 
   renderOne: function(artist) {
-    var artistSelection = new App.Views.MainArtistSelection({ model: artist });
+    var artistData = {
+      'data-artist-id' : artist.get('artistId'),
+      'data-artist-img' : artist.get('artistImg')
+    };
+    var artistSelection = new App.Views.MainArtistSelection({ model: artist, attributes: artistData });
     this.$('#main-artist-search-results').append(artistSelection.$el);
   },
 
