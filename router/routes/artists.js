@@ -1,7 +1,12 @@
 var express    = require('express'),
 	router     = express.Router(),
+<<<<<<< HEAD
 	logger     = require('morgan'),
     SpotifyApi = require('spotify-web-api-node');
+=======
+	logger     = require('morgan');
+    SpotifyApi = require('spotify-web-api-node'),
+>>>>>>> 811d11f285beb66836a40ba51cce9d6a40c9651e
 
 router.use(logger('dev'));
 var spotify = new SpotifyApi();
