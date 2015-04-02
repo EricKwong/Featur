@@ -28,7 +28,7 @@
     <header>
       <h1>featr</h1>
       <hr>
-      <input name='search-input' type='text' placeholder='Artist...'>
+      <input id='search-input' type='text' placeholder='Artist...'>
       <button id='search-button'>Search</button>
       <hr>
     </header>
@@ -46,8 +46,8 @@
 <!-- Main Artist -->
   <template id='main-artist-template'>
     <div class='main-artist' data-artistId='{{artistId}}'>
-      <img src='{{imageUrl}}' alt='{{name}}'>
-      <h2 class='name'>{{name}}</h2>
+      <img src='{{artistImg}}' alt='{{artistName}}'>
+      <h2 class='name'>{{artistName}}</h2>
     </div>
   </template>
 
@@ -55,7 +55,7 @@
   <template id='main-artist-selection-template'>
     <div class='main-artist-selection'>
       <ul>
-        <li>{{name}}</li>
+        <li>{{artistName}}</li>
       </ul>
     </div>
   </template>
@@ -63,11 +63,11 @@
 <!-- Collab Artist -->
   <template id='collab-artist-template'>
     <div class='collab-artist' data-artistId='{{artistId}}'>
-      <img src='{{imageUrl}}' alt='{{name}}'>
-      <h2 class='name'>{{name}}</h2>
+      <img src='{{artistImg}}' alt='{{artistName}}'>
+      <h2 class='name'>{{artistName}}</h2>
       <ul class='track-list'>
         {{#each track}}
-          <li data-trackId='{{trackId}}'>{{trackName}}</li>
+          <li data-trackId='{{trackId}}' data-trackUri='{{trackUri}}'>{{trackName}}</li>
         {{/each}} 
       </ul>
     </div>

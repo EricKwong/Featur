@@ -8,7 +8,7 @@ var App = {
 $(function() {
   console.log('Loaded: app.js');
 
-  var App.mainArtistsCollection = new App.Collections.MainArtists();
-  var App.collabArtistsCollection = new App.Collections.CollabArtists();
-  var App.mainArtistsView = new App.Views.MainArtists({collection: App.mainArtistsCollection});
+  App.mainArtistsCollection = new App.Collections.MainArtists();
+  App.collabArtistsCollection = new App.Collections.CollabArtists();
+  App.mainArtistsView = new App.Views.MainArtists({collection: App.mainArtistsCollection});
 });
