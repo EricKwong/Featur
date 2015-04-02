@@ -9,7 +9,7 @@ App.Views.MainArtists = Backbone.View.extend({
   },
 
   render: function() {
-  	this.collection.each(this.renderOne.bind(this));
+  	this.collection.each(this.renderOne);
   },
 
   renderOne: function(artist) {
