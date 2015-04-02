@@ -2,7 +2,7 @@ console.log('Loaded: views/main_artists.js');
 
 App.Views.MainArtists = Backbone.View.extend({
 
-	el: '#main-artist-search-results',
+	el: '#main-container',
 
   initialize: function() {
     console.log('Created: MainArtists Coll View');
@@ -14,6 +14,6 @@ App.Views.MainArtists = Backbone.View.extend({
 
   renderOne: function(artist) {
   	var artistSelection = new App.Views.MainArtistSelection({ model: artist });
-  	this.$el.append(artistSelection.$el);
+  	this.$('#main-artist-search-results').append(artistSelection.$el);
   }  
 });

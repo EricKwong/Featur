@@ -7,5 +7,8 @@ App.Views.MainArtistSelection = Backbone.View.extend({
   	this.mainArtistTemplate = Handlebars.compile($('#main-artist-selection-template').html());
   },
 
+  render: function() {
+  	this.$el.html(this.mainArtistTemplate(this.model.toJSON()));
+  }
 
 });
