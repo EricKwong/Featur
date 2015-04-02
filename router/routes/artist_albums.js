@@ -57,27 +57,51 @@ router.get('/:artist_id', function (req, res) {
 
       var collabArtists = [artistAndTrack[0]];
 
-      
 
       for (var i = 1; i < artistAndTrack.length; i++) {
         var artId = artistAndTrack[i].artistId;
         var currentTrack = artistAndTrack[i].track[0];
         var collabIds = collabArtists.map(function (a) {return a.artistId});
         var artIndex = collabIds.indexOf(artId);
-        console.log('\n');
-        console.log('collabIds: ', collabIds);
-        console.log('artId: ', artId, 'artIndex', artIndex, '\n', currentTrack);
+        // console.log('\n');
+        // console.log('collabIds: ', collabIds);
+        // console.log('artId: ', artId, 'artIndex', artIndex, '\n', currentTrack);
 
         if ( artIndex === -1 ) {
           collabArtists.push( artistAndTrack[i] );
         } else {
-          console.log('collabArtists:', collabArtists );
           collabArtists[artIndex].track.push(currentTrack);
         }
       
       };
 
-      res.send(collabArtists);
+      var collabArtistsWithImg = [];
+
+
+      for (var j = 0; j < collabArtists.length; j++) {
+        spotify.getArtist(collabArtists[j].artistId)
+               .then(function(artistInfo) {
+                // res.send(artistInfo)
+                  var undefinedCheck = function(image) {
+                    if (image !== undefined) {
+                      return image.url;
+                    } else {
+                      return "http://newton.physics.uiowa.edu/~sbaalrud/empty_profile.gif";
+                    }
+                  };
+
+                  var imgUrl = undefinedCheck(artistInfo.body.images[0]);
+                  // console.log(imgUrl);
+                  res.send(collabArtists[j]);
+                  collabArtists[j].artistImg = imgUrl;
+                  // console.log(collabArtists[j]);
+                  // collabArtistsWithImg.push(collabArtists[j]);
+               });
+      }
+
+      // res.send(collabArtistsWithImg);
+
+      // res.send(collabArtists);
 
     });
       
