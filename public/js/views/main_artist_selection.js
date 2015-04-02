@@ -21,9 +21,9 @@ App.Views.MainArtistSelection = Backbone.View.extend({
   },
 
   showMainArtist: function() {
-    var artistId = this.$('.main-artist-selection').data('artist-id');
-  	var artistImg = this.$('.main-artist-selection').data('artist-img');
-    var artistName = this.$('.main-artist-selection').text();
+    var artistId = this.$el.data('artist-id');
+  	var artistImg = this.$el.data('artist-img');
+    var artistName = this.$el.text();
   	App.mainArtistsView.showMainArtist(artistId, artistImg, artistName);
   }
 
