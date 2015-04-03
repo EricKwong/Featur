@@ -2,36 +2,48 @@ div.main-artist-selection {
   border: 1px solid red;
   padding: 2px;
   margin: 2px;
+  width: 300px;
+}
+
+button.save-track {
+  display: inline;
+  float: right;
 }
 
 #main-artist-container {
+  border: 1px solid blue;
   display: inline-block;
   float: left;
 }
 
 #collab-artist-container {
+  border: 1px solid red;
   display: inline-block;
   
 }
 
 div.main-artist {
-  border: 1px solid blue;
   height: 300px;
   width: 300px;
 }
 
 div.collab-artist {
+  height: auto;
+  width: 500px;
   border: 1px solid green;
 }
 
-div.main-artist img {
-  height: 200px;
-  width: 200px;
+img {
+  height: 300px;
+  width: 300px;
 }
 
 li {
   border: 1px solid purple;
   list-style-type: none;
   margin: 2px;
+  line-height: 1.3
 }
+
+
 

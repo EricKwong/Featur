@@ -30,7 +30,7 @@ App.Views.MainArtistSelection = Backbone.View.extend({
 
   showCollabArtist: function(artistId) {
     var getCollabRoute = '/get_collabs/' + artistId;
-    App.collabArtistsView.getCollabs(getCollabRoute, artistId);
+    App.collabArtistsView.getCollabs(getCollabRoute);
   }
 
 });
