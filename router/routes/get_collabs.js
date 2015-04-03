@@ -35,7 +35,7 @@ router.get('/:artist_id', function (req, res) {
       });
 
       // Create objects linking each artist and each track for each track that artists
-      // collaborated on
+      //  collaborated on
       var artistAndTrack = [];
       trackArray.forEach(function(track) {
         track.artists.forEach(function(artist) {
