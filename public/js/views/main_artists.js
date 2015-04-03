@@ -32,7 +32,7 @@ App.Views.MainArtists = Backbone.View.extend({
   searchArtist: function() {
     var searchInput = this.$('#search-input').val();
     this.$('#search-input').val("");
-    this.collection.url = '/search_artists/' + encodeURI(searchInput);
+    this.collection.url = '/search_artists/kanye west';//encodeURI(searchInput);
     this.collection.fetch({reset: true});
   },
 

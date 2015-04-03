@@ -88,11 +88,13 @@ router.get('/:artist_id', function (req, res) {
               .then(function (artists) {
                 var artistArray = artists.body.artists;
                 for (var i = 0; i < artistArray.length; i++) {
-                  var imgUrl = undefinedCheck(artistArray[i].images[1]);
+                  var imgUrl = undefinedCheck(artistArray[i].images[0]);
                   collabArtists[i].artistImg = imgUrl;
 
                 };
       
+              // Remove first object corresponding to mainArtist
+              collabArtists.shift();
               // Send response
               res.send(collabArtists); 
               }); // END .then()
