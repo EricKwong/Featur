@@ -19,7 +19,7 @@ App.Views.MainArtists = Backbone.View.extend({
     this.collection.each(this.renderOne);
   },
 
-  renderOne: function(artist) {
+  renderOne: function(artistModel) {
     var artistData = {
       'data-artist-id' : artist.get('artistId'),
       'data-artist-img' : artist.get('artistImg')

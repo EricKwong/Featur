@@ -25,6 +25,10 @@ App.Views.MainArtistSelection = Backbone.View.extend({
   	var artistImg = this.$el.data('artist-img');
     var artistName = this.$el.text();
   	App.mainArtistsView.showMainArtist(artistId, artistImg, artistName);
+  },
+
+  showCollabArtist: function() {
+    
   }
 
 });
