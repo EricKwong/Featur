@@ -2,13 +2,13 @@ var express    = require('express'),
     router     = express.Router(),
     logger     = require('morgan'),
     bodyParser = require('body-parser'),
-    models		 = require('./models');
-
-router.use(logger('dev'));
-router.use(bodyParser());
+    models		 = require('../../models');
 
 var Playlist = models.playlists;
 var Song = models.songs;
+
+router.use(logger('dev'));
+router.use(bodyParser());
 
 // Index
 router.get('/', function (req, res) {
@@ -29,6 +29,7 @@ router.get('/:id/songs', function (req, res) {
 		.then(function(playlist) {
 			res.send(playlist);
 		});
+});
 
 // Create
 router.post('/', function (req, res) {

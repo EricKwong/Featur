@@ -2,7 +2,7 @@ var express    = require('express'),
 	  router     = express.Router(),
 	  logger     = require('morgan'),
 	  bodyParser = require('body-parser'),
-	  models     = require('./models');
+	  models     = require('../../models');
 
 var Song = models.songs;
 
@@ -16,3 +16,5 @@ router.get('/', function (req, res) {
 			res.send(newSong);
 		});
 });
+
+module.exports = router;
