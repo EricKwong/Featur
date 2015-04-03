@@ -4,12 +4,12 @@ App.Views.MainArtistSelection = Backbone.View.extend({
 
   initialize: function() {
     console.log('Created: MainArtistSelection View');
-  	this.mainArtistTemplate = Handlebars.compile($('#main-artist-selection-template').html());
-  	this.render();
+    this.mainArtistTemplate = Handlebars.compile($('#main-artist-selection-template').html());
+    this.render();
   },
 
   events: {
-  	'click' : 'showMainArtist'
+    'click' : 'showMainArtist'
   },
 
   className: 'main-artist-selection',
@@ -17,14 +17,14 @@ App.Views.MainArtistSelection = Backbone.View.extend({
   tagName: 'div',
 
   render: function() {
-  	this.$el.html(this.mainArtistTemplate(this.model.toJSON()));
+    this.$el.html(this.mainArtistTemplate(this.model.toJSON()));
   },
 
   showMainArtist: function() {
     var artistId = this.$el.data('artist-id');
-  	var artistImg = this.$el.data('artist-img');
+    var artistImg = this.$el.data('artist-img');
     var artistName = this.$el.text();
-  	App.mainArtistsView.showMainArtist(artistId, artistImg, artistName);
+    App.mainArtistsView.showMainArtist(artistId, artistImg, artistName);
     this.showCollabArtist(artistId);
   },
 
