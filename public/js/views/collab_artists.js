@@ -5,13 +5,14 @@ App.Views.CollabArtists = Backbone.View.extend({
     console.log('Created: CollabArtists Coll View');
     this.listenTo(this.collection, 'reset', this.render);
     // this.listenTo(this.collection, 'remove', this.render);
-    this.render();
+    
   },
 
   el: '#collab-artist-container',
 
   render: function() {
     this.collection.each(this.renderOne, this);
+    
   },
 
   renderOne: function(collabArtistModel) { 

@@ -11,7 +11,7 @@ router.get('/:artist', function (req, res) {
     .then(function(data) {
         var artists = data.body.artists.items;
         var newArtists = artists.map(function(artist) {
-            var imageUrl = artist.images[1];
+            var imageUrl = artist.images[0];
 
             var undefinedCheck = function(image) {
                 if (image !== undefined) {

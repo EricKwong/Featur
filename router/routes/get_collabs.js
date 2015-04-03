@@ -57,9 +57,12 @@ router.get('/:artist_id', function (req, res) {
       // Transform linking object array into array with one object for each object,
       // containing array of all track objects for that artist 
       var collabArtists = [artistAndTrack[0]];
+
       for (var i = 1; i < artistAndTrack.length; i++) {
         var artId = artistAndTrack[i].artistId;
         var currentTrack = artistAndTrack[i].track[0];
+        
+        // Retrieve ids of all artist objects already created        
         var collabIds = collabArtists.map(function (a) {return a.artistId});
         var artIndex = collabIds.indexOf(artId);
         // console.log('\n');
@@ -69,7 +72,20 @@ router.get('/:artist_id', function (req, res) {
         if ( artIndex === -1 ) {
           collabArtists.push( artistAndTrack[i] );
         } else {
-          collabArtists[artIndex].track.push(currentTrack);
+
+          // iterate through the track array and push each the track names into an array. Then, check name of current temp data [i] against array.
+
+          var tracksAlreadyThere = collabArtists[artIndex].track.map(function (t) {return t.trackName});
+          var trackToPush = currentTrack.trackName;
+          console.log(tracksAlreadyThere);
+          console.log(trackToPush);
+
+          var trackIndex = tracksAlreadyThere.indexOf(trackToPush);
+          console.log(trackIndex);
+          if ( trackIndex === -1 ) {
+            collabArtists[artIndex].track.push(currentTrack);
+            
+          }
         }
       
       };
