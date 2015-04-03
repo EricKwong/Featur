@@ -63,7 +63,11 @@
       <h2 class='name'>{{artistName}}</h2>
       <ul class='track-list'>
         {{#each track}}
-          <li data-track-id='{{trackId}}' data-track-uri='{{trackUri}}'>{{trackName}}</li>
+          <li data-track-id='{{trackId}}' data-track-uri='{{trackUri}}'>
+            {{trackName}}
+            <button class='save-track'>Save</button>
+          </li>
+
         {{/each}} 
       </ul>
     </div>
