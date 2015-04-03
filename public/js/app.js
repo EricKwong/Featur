@@ -11,5 +11,5 @@ $(function() {
   App.mainArtistsCollection = new App.Collections.MainArtists();
   App.collabArtistsCollection = new App.Collections.CollabArtists();
   App.mainArtistsView = new App.Views.MainArtists({collection: App.mainArtistsCollection});
-  App.collabArtistsView = new App.Vies.CollabArtists({collection: App.Collections.CollabArtists()});
+  App.collabArtistsView = new App.Views.CollabArtists({collection: App.collabArtistsCollection});
 });

@@ -6,14 +6,20 @@ App.Views.CollabArtists = Backbone.View.extend({
     this.listenTo(this.collection, 'reset', this.render);
   },
 
-  el: '#collab-artist-container',
+ 	el: '#collab-artist-container',
 
   render: function() {
-  	this.collection.each(this.renderOne);
+  	this.collection.each(this.renderOne, this);
   },
 
   renderOne: function(collabArtistModel) {
   	var collabArtist = new App.Views.CollabArtist({model: collabArtistModel});
-  	this.$el.append(collabArtist);
+  	console.log(this);
+  	this.$el.append(collabArtist.$el);
+  },
+
+  getCollabs: function(collabRoute) {
+  	this.collection.url = collabRoute;
+  	this.collection.fetch({reset: true});
   }
 });
