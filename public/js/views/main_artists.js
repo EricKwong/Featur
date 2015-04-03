@@ -16,15 +16,16 @@ App.Views.MainArtists = Backbone.View.extend({
   render: function() {
     this.$('#main-artist-search-results').empty();
     this.$('#main-artist-container').empty();
-    this.collection.each(this.renderOne);
+    this.$('#collab-artist-container').empty();
+    this.collection.each(this.renderOne, this);
   },
 
-  renderOne: function(artist) {
+  renderOne: function(artistModel) {
     var artistData = {
-      'data-artist-id' : artist.get('artistId'),
-      'data-artist-img' : artist.get('artistImg')
+      'data-artist-id' : artistModel.get('artistId'),
+      'data-artist-img' : artistModel.get('artistImg')
     };
-    var artistSelection = new App.Views.MainArtistSelection({ model: artist, attributes: artistData });
+    var artistSelection = new App.Views.MainArtistSelection({ model: artistModel, attributes: artistData });
     this.$('#main-artist-search-results').append(artistSelection.$el);
   },
 
