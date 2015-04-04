@@ -10,7 +10,8 @@ App.Views.Playlist = Backbone.View.extend({
 	el: '#playlist',
 
 	events: {
-		'click #create-playlist' : 'createPlaylist'
+		'click #create-playlist' : 'createPlaylist',
+		'change #playlist-dropdown' : 'showPlaylistSongs'
 	},
 
 	render: function() {
@@ -26,5 +27,12 @@ App.Views.Playlist = Backbone.View.extend({
 		var playlistName = this.$('#playlist-name-input').val();
 		this.collection.create({name: playlistName});
 		this.$('#playlist-name-input').val('');
+	},
+
+	showPlaylistSongs: function() {
+		var playlistId = $('#playlist-dropdown option:selected').data('playlist-id');
+		var songsViewCollection = App.playlistSongsView.collection;
+		songsViewCollection.url = '/playlists/' + playlistId + '/songs';
+		songsViewCollection.fetch({reset: true});
 	}
 });

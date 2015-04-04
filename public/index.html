@@ -15,15 +15,20 @@
   <script src='js/models/main_artist.js'></script>
   <script src='js/models/collab_artist.js'></script>
   <script src='js/models/playlist.js'></script>
+  <script src='js/models/playlist_song.js'></script>
+  <script src='js/models/save_song.js'></script>
   <script src='js/collections/main_artists.js'></script>
   <script src='js/collections/collab_artists.js'></script>
   <script src='js/collections/playlist.js'></script>
+  <script src='js/collections/playlist_songs.js'></script>
   <script src='js/views/main_artist_selection.js'></script>
   <script src='js/views/collab_artist.js'></script>
   <script src='js/views/main_artists.js'></script>
   <script src='js/views/main_artist.js'></script>
   <script src='js/views/collab_artists.js'></script>
   <script src='js/views/playlist.js'></script>
+  <script src='js/views/playlist_song.js'></script>
+  <script src='js/views/playlist_songs.js'></script>
 </head>
 <body>
   
@@ -43,6 +48,7 @@
       <select id='playlist-dropdown'></select>
       <input type="text" id='playlist-name-input'>
       <button id='create-playlist'>Create</button>
+      <ul id='listed-songs'></ul>
     </section>
       
     <section id='artists-container'>
@@ -74,7 +80,7 @@
         {{#each track}}
           <li data-track-id='{{trackId}}' data-track-uri='{{trackUri}}'>
             {{trackName}}
-            <button class='save-track'>Save</button>
+            <button class='save-track' data-track-id='{{trackId}}' data-track-uri='{{trackUri}}' data-track-name='{{trackName}}'>Save</button>
           </li>
         {{/each}} 
       </ul>
@@ -84,7 +90,13 @@
 <!-- Playlist -->
 
 <template id='playlist-dropdown-template'>
-  <option data-playlist-id='{{id}}' value='{{name}}'>{{name}}</option>
+  <option data-playlist-id='{{id}}'>{{name}}</option>
+</template>
+
+<!-- Playlist Song template -->
+
+<template id='song-template'>
+  <li class='playlist-song' data-track-id='{{trackId}}' data-track-uri='{{trackUri}}'>{{trackName}}</li>
 </template>
 
 </body>
