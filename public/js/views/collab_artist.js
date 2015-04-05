@@ -27,8 +27,16 @@ App.Views.CollabArtist = Backbone.View.extend({
       trackUri: trackUri
     };
 
-    var saveSong = new App.Models.SaveSongs(songData); 
-    saveSong.save();
-    var songToPlaylist = new App.Models.SongsToPlaylist
+    var songs = new App.Collections.Songs();
+    songs.fetch();
+    songs.create(songData);
+
+    var playlistId = $('#playlist-dropdown option:selected').data('playlist-id');
+    var selectedSong = songs.findWhere({'trackId' : trackId});
+    debugger;
+    var songId = selectedSong.id;
+    var songToPlaylistUrl = '/playlist/' + playlistId + '/add_song';
+    var songToPlaylist = new App.Models.SongsToPlaylist({url: songToPlaylistUrl, defaults: {id: songId}});
+    songToPlaylist.save();
   }
 });

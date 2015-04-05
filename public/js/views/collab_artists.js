@@ -17,7 +17,7 @@ App.Views.CollabArtists = Backbone.View.extend({
 
   renderOne: function(collabArtistModel) { 
     var collabArtist = new App.Views.CollabArtist({ model: collabArtistModel });
-    console.log(this);
+    // console.log(this);
     this.$el.append(collabArtist.$el);
   },
 
