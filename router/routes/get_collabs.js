@@ -33,87 +33,55 @@ router.get('/:artist_id', function (req, res) {
 
     } else {
 
-      // Request to get all album information for first 20 albums
+      // #######  Request to get all album information for first 20 albums #######
       request({
         uri: 'https://api.spotify.com/v1/albums?ids=' + first20, 
         method: 'GET',
         json: true
         }, function (error, response, body) {
 
-          // ADD CONDITIONAL TO DETERMINE NUMBER OF ALBUM IDs ???
-
-          // request({
-          //   uri: 'https://api.spotify.com/v1/albums?ids=' + second20, 
-          //   method: 'GET',
-          //   json: true
-          //   }, 
-          //   function (error, response, body) { 
-
-              var albumsWithTracks = body.albums.map(function (album) { return album.tracks.items });
-              // var secondList = albumGroup2.map(function (album) { return album.tracks.items });
-              // var albumsWithTracks = firstList.concat(secondList);
-              // var albumsWithTracks = firstList;
-
-              // Create one dimensional array of all tracks
-              var trackArray = [];
-              albumsWithTracks.forEach(function (album) {
+              // Create nested object of [allAlbums] [allTracks] for main artist
+              var first20Albums = body.albums.map(function (album) { return album.tracks.items });
+              // Create one dimensional array of all tracks from nested object
+              var first20AlbumsTracks = [];
+              first20Albums.forEach(function (album) {
                 album.forEach(function (track) {
-                  trackArray.push(track);
+                  first20AlbumsTracks.push(track);
                 });
               
               });
 
 
-              // Create nested object of all tracks for all albums of main artist
-              // Create objects linking each artist and each track for each track that artists collaborated on
-              var artistAndTrack = [];
-              trackArray.forEach(function(track) {
-                track.artists.forEach(function(artist) {
+              if ( albumIds.length < 20 ) {
 
-                  var artistInfo = {
-                    artistName: artist.name,
-                    artistId: artist.id,
-                    track: [{ 
-                      trackName: track.name,
-                      trackId: track.id,
-                      trackUri: track.uri
-                    }],
-                  };
+                createCollabArtists(first20AlbumsTracks);
+                // res.send(collabArtists);
 
-                  artistAndTrack.push(artistInfo);
-                });
-              });
+              } else {
 
-              // Transform linking object array into array with one object for each object, containing array of all track objects for that artist 
-              var collabArtists = [artistAndTrack[0]];
+                request({
+                  uri: 'https://api.spotify.com/v1/albums?ids=' + second20, 
+                  method: 'GET',
+                  json: true
+                  }, function (error, response, body) { 
 
-              for (var i = 1; i < artistAndTrack.length; i++) {
-                var artId = artistAndTrack[i].artistId;
-                var currentTrack = artistAndTrack[i].track[0];
-                
-                // Retrieve ids of all artist objects already created        
-                var collabIds = collabArtists.map(function (a) {return a.artistId});
-                var artIndex = collabIds.indexOf(artId);
 
-  // console.log('\n');
-  // console.log('collabIds: ', collabIds);
-  // console.log('artId: ', artId, 'artIndex', artIndex, '\n', currentTrack);
+                    var second20Albums = body.albums.map(function (album) { return album.tracks.items });
+                    var second20AlbumsTracks = [];
+                    second20Albums.forEach(function (album) {
+                      album.forEach(function (track) {
+                        second20AlbumsTracks.push(track);
+                      });
+                    
+                    });
 
-                // Push collab artist to final object array if not already there
-                if ( artIndex === -1 ) {
-                  collabArtists.push( artistAndTrack[i] );
-                } else {
-                  // If collab artist is already in final object array
-                  // Iterate through the track array and push each the track names into an array. Then, check name of current temp data [i] against array to eliminate same tracks having different Ids
-                  var tracksAlreadyThere = collabArtists[artIndex].track.map(function (t) {return t.trackName});
-                  var trackToPush = currentTrack.trackName;
-                  var trackIndex = tracksAlreadyThere.indexOf(trackToPush);
-                  if ( trackIndex === -1 ) {
-                    collabArtists[artIndex].track.push(currentTrack);
+                    var allTracksArray = first20AlbumsTracks.concat(second20AlbumsTracks);
 
-                  }
-                }
-              };
+                    createCollabArtists(allTracksArray);
+
+                  });
+
+              } // END ELSE
 
               // Helper function for dealing with undefined image urls
               var undefinedCheck = function(image) {
@@ -124,25 +92,82 @@ router.get('/:artist_id', function (req, res) {
                 }
               };
 
-              // Request to obtain artist image URLs
-              request({
-                uri: 'https://api.spotify.com/v1/artists?ids=' + collabIds.join(),
-                method: 'GET',
-                json: true
-              }, function (error, response, body) {
+              // Helper function to create final array of collab artist objects based on array of all track objects
+              var createCollabArtists = function(allTracksArray) {
 
-                var artistArray = body.artists;
-                for (var i = 0; i < artistArray.length; i++) {
-                  var imgUrl = undefinedCheck(artistArray[i].images[0]);
-                  collabArtists[i].artistImg = imgUrl;
+                // Create objects linking each artist and each track for each track that artists collaborated on
+                var artistAndTrack = [];
+                allTracksArray.forEach(function(track) {
+                  track.artists.forEach(function(artist) {
 
+                    var artistInfo = {
+                      artistName: artist.name,
+                      artistId: artist.id,
+                      track: [{ 
+                        trackName: track.name,
+                        trackId: track.id,
+                        trackUri: track.uri
+                      }],
+                    };
+
+                    artistAndTrack.push(artistInfo);
+                  });
+                });
+
+                // Transform linking object array into array with one object for each object, containing array of all track objects for that artist 
+                var collabArtists = [artistAndTrack[0]];
+
+                for (var i = 1; i < artistAndTrack.length; i++) {
+                  var artId = artistAndTrack[i].artistId;
+                  var currentTrack = artistAndTrack[i].track[0];
+                  
+                  // Retrieve ids of all artist objects already created        
+                  var collabIds = collabArtists.map(function (a) {return a.artistId});
+                  var artIndex = collabIds.indexOf(artId);
+
+    // console.log('\n');
+    // console.log('collabIds: ', collabIds);
+    // console.log('artId: ', artId, 'artIndex', artIndex, '\n', currentTrack);
+
+                  // Push collab artist to final object array if not already there
+                  if ( artIndex === -1 ) {
+                    collabArtists.push( artistAndTrack[i] );
+                  } else {
+                    // If collab artist is already in final object array
+                    // Iterate through the track array and push each the track names into an array. Then, check name of current temp data [i] against array to eliminate same tracks having different Ids
+                    var tracksAlreadyThere = collabArtists[artIndex].track.map(function (t) {return t.trackName});
+                    var trackToPush = currentTrack.trackName;
+                    var trackIndex = tracksAlreadyThere.indexOf(trackToPush);
+                    if ( trackIndex === -1 ) {
+                      collabArtists[artIndex].track.push(currentTrack);
+
+                    }
+                  }
                 };
-                // Remove first object corresponding to mainArtist
-                collabArtists.shift();
-                // Send response
-                res.send(collabArtists); 
 
-              });
+                // Request to obtain artist image URLs
+                request({
+                  uri: 'https://api.spotify.com/v1/artists?ids=' + collabIds.join(),
+                  method: 'GET',
+                  json: true
+                }, function (error, response, body) {
+
+                  console.log(response)
+                  debugger;
+                  var artistArray = body.artists;
+                  for (var i = 0; i < artistArray.length; i++) {
+                    var imgUrl = undefinedCheck(artistArray[i].images[0]);
+                    collabArtists[i].artistImg = imgUrl;
+
+                  };
+                  // Remove first object corresponding to mainArtist
+                  collabArtists.shift();
+                  // Send response
+                  res.send(collabArtists); 
+
+                });
+                
+              };
 
           // });   // END REQUEST FOR DATA OF SECOND 20 ALBUMS 
 
