@@ -3,7 +3,9 @@ module.exports = function(sequelize, DataTypes) {
   var songs = sequelize.define("songs", {
     trackName: DataTypes.STRING,
     trackId: DataTypes.STRING,
-    trackUri: DataTypes.STRING
+    trackUri: DataTypes.STRING,
+    collabArtist: DataTypes.STRING,
+    mainArtist: DataTypes.STRING
   }, {
 
     timestamps: false,

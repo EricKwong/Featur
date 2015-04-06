@@ -64,7 +64,7 @@
 <!-- TEMPLATES -->
 <!-- Main Artist -->
   <template id='main-artist-template'>
-    <div class='main-artist' data-artist-id='{{artistId}}'>
+    <div class='main-artist' data-artist-name='{{artistName}}'data-artist-id='{{artistId}}'>
       <img src='{{artistImg}}' alt='{{artistName}}'>
       <h2 class='name'>{{artistName}}</h2>
     </div>
@@ -100,7 +100,7 @@
 <!-- Playlist Song template -->
 
 <template id='song-template'>
-  <li class='playlist-song' data-track-id='{{trackId}}' data-track-uri='{{trackUri}}'>{{trackName}}</li>
+  <li class='playlist-song' data-track-id='{{trackId}}' data-track-uri='{{trackUri}}'>{{mainArtist}} feat. {{collabArtist}} - {{trackName}}</li>
 </template>
 
 </body>

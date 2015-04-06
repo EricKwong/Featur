@@ -20,11 +20,15 @@ App.Views.CollabArtist = Backbone.View.extend({
   	var trackId = $(clickedTrack).data('track-id');
   	var trackUri = $(clickedTrack).data('track-uri');
   	var trackName = $(clickedTrack).data('track-name');
+    var collabArtist = $(clickedTrack).parents('.collab-artist').data('artist-name');
+    var mainArtist = $('.main-artist .name').text();
   	
     var songData = {
       trackName: trackName,
       trackId: trackId,
-      trackUri: trackUri
+      trackUri: trackUri,
+      collabArtist: collabArtist,
+      mainArtist: mainArtist
     };
     
     var songsCollection = new App.Collections.Songs();
@@ -42,11 +46,10 @@ App.Views.CollabArtist = Backbone.View.extend({
           data: {songId: songId}
         }).done(function() {
           App.playlistSongsView.updatePlaylist();
-          
         });
 
       }});
-      
+
     }});
   }
 });
