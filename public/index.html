@@ -12,18 +12,27 @@
 
   <!-- JS Scripts -->
   <script src='js/app.js'></script>
+  
   <script src='js/models/main_artist.js'></script>
   <script src='js/models/collab_artist.js'></script>
   <script src='js/models/playlist.js'></script>
+  <script src='js/models/playlist_song.js'></script>
+  <script src='js/models/song.js'></script>
+
   <script src='js/collections/main_artists.js'></script>
   <script src='js/collections/collab_artists.js'></script>
   <script src='js/collections/playlist.js'></script>
+  <script src='js/collections/playlist_songs.js'></script>
+  <script src='js/collections/songs.js'></script>
+
   <script src='js/views/main_artist_selection.js'></script>
   <script src='js/views/collab_artist.js'></script>
   <script src='js/views/main_artists.js'></script>
   <script src='js/views/main_artist.js'></script>
   <script src='js/views/collab_artists.js'></script>
   <script src='js/views/playlist.js'></script>
+  <script src='js/views/playlist_song.js'></script>
+  <script src='js/views/playlist_songs.js'></script>
 </head>
 <body>
   
@@ -40,6 +49,7 @@
         <select id='playlist-dropdown'></select>
         <input type="text" id='playlist-name-input' placeholder='Playlist name...'>
         <button id='create-playlist'>Create</button>
+        <ul id='listed-songs'></ul>
       </section>
 
     </header>
@@ -51,7 +61,7 @@
 
   <!-- MAIN WINDOW-->
     <section id='main-artist-search-results'></section>
-  
+
     <section id='artists-container'>
       <div id='main-artist-container'></div>
       <div id='collab-artist-container'></div>   
@@ -61,7 +71,7 @@
 <!-- TEMPLATES -->
 <!-- Main Artist -->
   <template id='main-artist-template'>
-    <div class='main-artist' data-artist-id='{{artistId}}'>
+    <div class='main-artist' data-artist-name='{{artistName}}' data-artist-id='{{artistId}}'>
       <div class='main circular-img' style='background-image: url({{artistImg}})' alt='{{artistName}}'></div>
       <h2 class='name'>{{artistName}}</h2>
     </div>
@@ -74,14 +84,14 @@
 
 <!-- Collab Artist -->
   <template id='collab-artist-template'>
-    <div class='collab-artist' data-artist-id='{{artistId}}'>
+    <div class='collab-artist' data-artist-name='{{artistName}}' data-artist-id='{{artistId}}'>
       <div class='collab circular-img' style='background-image: url({{artistImg}})' alt='{{artistName}}'></div>
       <h2 class='name'>{{artistName}}</h2>
       <ul class='track-list'>
         {{#each track}}
           <li data-track-id='{{trackId}}' data-track-uri='{{trackUri}}'>
             {{trackName}}
-            <button class='save-track'>Save</button>
+            <button class='save-track' data-track-id='{{trackId}}' data-track-uri='{{trackUri}}' data-track-name='{{trackName}}'>Save</button>
           </li>
         {{/each}} 
       </ul>
@@ -90,9 +100,16 @@
 
 <!-- Playlist -->
 
-  <template id='playlist-dropdown-template'>
-    <option data-playlist-id='{{id}}' value='{{name}}'>{{name}}</option>
-  </template>
+
+<template id='playlist-dropdown-template'>
+  <option data-playlist-id='{{id}}'>{{name}}</option>
+</template>
+
+<!-- Playlist Song template -->
+
+<template id='song-template'>
+  <li class='playlist-song' data-track-id='{{trackId}}' data-track-uri='{{trackUri}}'>{{mainArtist}} feat. {{collabArtist}} - {{trackName}}</li>
+</template>
 
 </body>
 </html>
