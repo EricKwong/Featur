@@ -29,12 +29,21 @@
   
   <div id='main-container'>
     <header>
-      <h1>featr</h1>
+      <h1>featur</h1>
+    
+      <div class='search-area'>
+        <input id='search-input' type='text' placeholder='Artist name...'>
+        <button id='search-button'>Search</button> 
+      </div>
+
+      <section id='playlist'>
+        <select id='playlist-dropdown'></select>
+        <input type="text" id='playlist-name-input' placeholder='Playlist name...'>
+        <button id='create-playlist'>Create</button>
+      </section>
+
     </header>
-    <div class='search-area'>
-    <input id='search-input' type='text' placeholder='Artist...'>
-    <button id='search-button'>Search</button> 
-    </div>
+    
 
     <!-- <div class='footer'>
       <p>Made with &hearts; by Emily, Eric & John.</p>
@@ -42,13 +51,7 @@
 
   <!-- MAIN WINDOW-->
     <section id='main-artist-search-results'></section>
-
-    <section id='playlist'>
-      <select id='playlist-dropdown'></select>
-      <input type="text" id='playlist-name-input' placeholder='Playlist name...'>
-      <button id='create-playlist'>Create</button>
-    </section>
-      
+  
     <section id='artists-container'>
       <div id='main-artist-container'></div>
       <div id='collab-artist-container'></div>   
@@ -87,9 +90,9 @@
 
 <!-- Playlist -->
 
-<template id='playlist-dropdown-template'>
-  <option data-playlist-id='{{id}}' value='{{name}}'>{{name}}</option>
-</template>
+  <template id='playlist-dropdown-template'>
+    <option data-playlist-id='{{id}}' value='{{name}}'>{{name}}</option>
+  </template>
 
 </body>
 </html>

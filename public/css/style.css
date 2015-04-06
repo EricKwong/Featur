@@ -13,6 +13,7 @@ body, html {
 
 :focus {
   outline: none;
+  opacity: 1;
 }
 
 h2 {
@@ -33,7 +34,7 @@ header {
 
 header h1 {
   margin: 0px;
-  padding: 25px;
+  padding: 25px 0 50px 0;
   font-weight: 300;
   font-size: 48px;
   color: snow;
@@ -46,18 +47,20 @@ input {
   width: 20%;
   height: 25px;
   padding: 5px;
-  margin-bottom: 25px;
+  margin-bottom: 40px;
   padding-left: 10px;
-  border: 1px solid lightgray;
-  color: lightslategray;
+  border: 1px solid snow;
+  color: slategray;
   font-family: Raleway, sans-serif;
   font-size: 12px;
   letter-spacing: .5px;
+  opacity: .5;
   transition: all 0.75s ease;
 }
 
 input:hover {
-  border: 1px solid lightslategray;
+  opacity: 1;
+  border: 1px solid lightseagreen;
   background-color: #f8f8f8;
 }
 
@@ -65,16 +68,41 @@ button {
   padding: 10px;
   font-size: 12px;
   border: 0px;
-  background: lightslategray;
-  color: white;
+  background: lightgray;
+  color: snow;
   font-family: Raleway, sans-serif;
   letter-spacing: .5px;
+  border: 1px solid lightgray;
   transition: all 0.75s ease;
 }
 
 button:hover {
-  background: dimgray;
+  background: lightseagreen;
   cursor: pointer;
+  border: 1px solid snow;
+}
+
+/* Playlist Input */
+
+#playlist {
+  margin-top: 25px;
+  float: right;
+  width: 40%;
+}
+
+#playlist-name-input {
+  width: 50%;
+  border: 1px solid lightgray;
+}
+
+#playlist-dropdown {
+  width: auto;
+  height: 25px;
+  padding: 10px;
+  font-size: 12px;
+  border: 0px;
+  background: lightgray;
+  color: snow;
 }
 
 /* Images */

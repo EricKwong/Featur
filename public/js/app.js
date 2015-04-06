@@ -16,9 +16,10 @@ $(function() {
   App.playlistView = new App.Views.Playlist({collection: App.playlistCollection});
 });
 
-var colors = ['slategray', 'darkslategray', 'dimgray', 'cornflowerblue', 'darkturquoise'];
 
 function switchColor () {
+  var colors = ['slategray', 'darkslategray', 'dimgray', 'cornflowerblue', 'darkturquoise'];
+
   if (length >= colors.length) length = 0;
   $('header').css('background-color', colors[length++]);
   setTimeout(switchColor, 1200);
