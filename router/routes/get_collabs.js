@@ -10,7 +10,6 @@ var spotify = new SpotifyApi();
 // Router to get all tracks for collaborating artists, based on main artist ID
 router.get('/:artist_id', function (req, res) {
 
-
   // Request to get albumIds from artistID
   request({
     uri: 'https://api.spotify.com/v1/artists/'+ req.params.artist_id + '/albums?market=US&limit=50&album_type=album,single', 
@@ -24,7 +23,6 @@ router.get('/:artist_id', function (req, res) {
     // var third20  = albumIds.slice(40,50);
 
 
-
     // First request to get all album information for first 20 albums
     request({
       uri: 'https://api.spotify.com/v1/albums?ids=' + first20, 
@@ -35,14 +33,14 @@ router.get('/:artist_id', function (req, res) {
 
         var albumGroup1 = body.albums;
         
-        // ADD CONDITIONAL TO DETERMINE NUMBER OF ALBUM IDs
+        // ADD CONDITIONAL TO DETERMINE NUMBER OF ALBUM IDs ???
 
-        request({
-          uri: 'https://api.spotify.com/v1/albums?ids=' + second20, 
-          method: 'GET',
-          json: true
-          }, 
-          function (error, response, body) { 
+        // request({
+        //   uri: 'https://api.spotify.com/v1/albums?ids=' + second20, 
+        //   method: 'GET',
+        //   json: true
+        //   }, 
+        //   function (error, response, body) { 
            
             var albumGroup2 = body.albums;
             var firstList = albumGroup1.map(function (album) { return album.tracks.items });
@@ -125,7 +123,7 @@ router.get('/:artist_id', function (req, res) {
             };
 
 // Replace Spotify wrapper call with Request call
-
+    console.log(collabIds)
             // // Call to Spotify API to get Artist Url
             // spotify.getArtists(collabIds)
             //         .then(function (artists) {
@@ -138,10 +136,10 @@ router.get('/:artist_id', function (req, res) {
             //           // Remove first object corresponding to mainArtist
                       collabArtists.shift();
             //           // Send response
-                      res.send(collabArtists); 
+                      res.send(albumsWithTracks); 
             //         }); // END .then()
 
-        });         
+        // });   // SECOND 20 ALBUMS REQUEST CALL      
 
 
 
