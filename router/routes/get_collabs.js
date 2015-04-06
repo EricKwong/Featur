@@ -109,11 +109,6 @@ router.get('/:artist_id', function (req, res) {
         count # of tracks for each collab artist
         sort collab artist array based on # of tracks
         */
-
-
-
-
-        debugger;
         
         if ( collabArtists.length === 0 ) {
           console.log("THERE ARE NO COLLABS");
