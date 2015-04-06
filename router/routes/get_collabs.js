@@ -16,10 +16,11 @@ router.get('/:artist_id', function (req, res) {
     method: 'GET',
     json: true
   }, function (error, response, body) {
-
-    // ############################################
-    // ########  FUNCTION DECLARATIONS  ###########
-    // ############################################
+    /*
+    ############################################
+    ########  FUNCTION DECLARATIONS  ###########
+    ############################################
+    */
 
     // Helper function for dealing with undefined image urls
     var undefinedCheck = function(image) {
@@ -29,9 +30,10 @@ router.get('/:artist_id', function (req, res) {
         return "http://newton.physics.uiowa.edu/~sbaalrud/empty_profile.gif";
       }
     };
-
-    // Large Function to eliminate redundant code for nested calls
-    // Creates final array of collab artist objects based on array of all track objects
+    /*
+    Large Function to eliminate redundant code for nested calls
+    Creates final array of collab artist objects based on array of all track objects
+    */    
     var createCollabArtists = function(allTracks) {
       // Create objects linking each artist to each track they appear on
       var artistAndTrack = [];
@@ -51,9 +53,10 @@ router.get('/:artist_id', function (req, res) {
           artistAndTrack.push(artistInfo);
         });
       });
-
-      // Transform linking object array into array with one object for each artist
-      // Each artist object contains an array of all track objects for that artist 
+      /*
+      Transform linking object array into array with one object for each artist
+      Each artist object contains an array of all track objects for that artist 
+      */      
       var collabArtists = [artistAndTrack[0]];
 
       for (var i = 1; i < artistAndTrack.length; i++) {
@@ -68,8 +71,9 @@ router.get('/:artist_id', function (req, res) {
         if ( artIndex === -1 ) {
           collabArtists.push( artistAndTrack[i] );
         } else {
-          // If collab artist is already in final object array
-          // Iterate through the track array and push each the track names into an array. Then, check name of current temp data [i] against array to eliminate same tracks having different Ids
+          /*
+          If collab artist is already in final object array, iterate through the track array and push each the track names into an array. Then, check name of current temp data [i] against array to eliminate same tracks having different Ids
+          */
           var tracksAlreadyThere = collabArtists[artIndex].track.map(function (t) {return t.trackName});
           var trackToPush = currentTrack.trackName;
           var trackIndex = tracksAlreadyThere.indexOf(trackToPush);
@@ -79,9 +83,10 @@ router.get('/:artist_id', function (req, res) {
           }
         }
       };
-      
-      // Request to obtain artist image URLs 
-      // Limit number of collaborators to 50 (maximum for acquiring artist data from API)
+      /*      
+      Request to obtain artist image URLs 
+      Limit number of collaborators to 50 (maximum for acquiring artist data from API)
+      */      
       var collabArtists = collabArtists.slice(0,50);
       var collabIds = collabArtists.map(function (a) {return a.artistId});
       request({
@@ -100,6 +105,16 @@ router.get('/:artist_id', function (req, res) {
         // Remove first object corresponding to mainArtist
         collabArtists.shift();
         
+        /*
+        count # of tracks for each collab artist
+        sort collab artist array based on # of tracks
+        */
+
+
+
+
+        debugger;
+        
         if ( collabArtists.length === 0 ) {
           console.log("THERE ARE NO COLLABS");
           var noCollabs = [{
@@ -117,11 +132,11 @@ router.get('/:artist_id', function (req, res) {
       });
       
     }; // END FUNCTION DECLARATION
-
-    // ############################################
-    // ########  BEGIN MAIN ROUTER LOGIC ##########
-    // ############################################
-
+    /*
+    ############################################
+    ########  BEGIN MAIN ROUTER LOGIC ##########
+    ############################################
+    */
     var albumIds = body.items.map( function (album) { return album.id } );
     var first20  = albumIds.slice(0,20).join();
     var second20 = albumIds.slice(20,40).join();
@@ -136,7 +151,7 @@ router.get('/:artist_id', function (req, res) {
       res.send(noAlbums);
 
     } else {
-      // #######  Request to get all album information for first 20 albums #######
+      // #######  Request to get all album information for first 20 albums 
       request({
         uri: 'https://api.spotify.com/v1/albums?ids=' + first20, 
         method: 'GET',
