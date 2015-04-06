@@ -3,6 +3,7 @@ App.Views.PlaylistSongs = Backbone.View.extend({
 		console.log('Created: Playlist Songs Collection View');
 		this.listenTo(this.collection, 'reset', this.render);
 		this.listenTo(this.collection, 'add', this.renderOne);
+		this.$el.hide();
 	},
 
 	el: '#listed-songs',

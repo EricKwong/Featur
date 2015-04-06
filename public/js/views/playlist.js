@@ -11,7 +11,9 @@ App.Views.Playlist = Backbone.View.extend({
 
 	events: {
 		'click #create-playlist' : 'createPlaylist',
-		'change #playlist-dropdown' : 'showPlaylistSongs'
+		'change #playlist-dropdown' : 'showPlaylistSongs',
+		'click #expand-down' : 'showPlaylist',
+		'click #collapse-up' : 'hidePlaylist'
 	},
 
 	render: function() {
@@ -32,5 +34,17 @@ App.Views.Playlist = Backbone.View.extend({
 	showPlaylistSongs: function() {
 		var playlistId = this.$('#playlist-dropdown option:selected').data('playlist-id');
 		App.playlistSongsView.showPlaylist(playlistId);
+	},
+
+	showPlaylist: function(clicked) {
+		var expandTriangle = clicked.currentTarget;
+		this.$('#listed-songs').show();
+		$(expandTriangle).attr('id', 'collapse-up');
+	},
+
+	hidePlaylist: function(clicked) {
+		var expandTriangle = clicked.currentTarget;
+		this.$('#listed-songs').hide();
+		$(expandTriangle).attr('id', 'expand-down');
 	}
 });
