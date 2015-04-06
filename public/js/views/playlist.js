@@ -30,9 +30,7 @@ App.Views.Playlist = Backbone.View.extend({
 	},
 
 	showPlaylistSongs: function() {
-		var playlistId = $('#playlist-dropdown option:selected').data('playlist-id');
-		var songsViewCollection = App.playlistSongsView.collection;
-		songsViewCollection.url = '/playlists/' + playlistId + '/songs';
-		songsViewCollection.fetch({reset: true});
+		var playlistId = this.$('#playlist-dropdown option:selected').data('playlist-id');
+		App.playlistSongsView.showPlaylist(playlistId);
 	}
 });

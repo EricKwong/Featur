@@ -26,17 +26,27 @@ App.Views.CollabArtist = Backbone.View.extend({
       trackId: trackId,
       trackUri: trackUri
     };
+    
+    var songsCollection = new App.Collections.Songs();
+    songsCollection.create(songData, {success: function() {
+      songsCollection.fetch({success: function() {
 
-    var songs = new App.Collections.Songs();
-    songs.fetch();
-    songs.create(songData);
+        var playlistId = $('#playlist-dropdown option:selected').data('playlist-id');
+        var selectedSong = songsCollection.findWhere({'trackId' : trackId});
+        var songId = selectedSong.id;
+        var songToPlaylistUrl = '/playlists/' + playlistId + '/add_song';
 
-    var playlistId = $('#playlist-dropdown option:selected').data('playlist-id');
-    var selectedSong = songs.findWhere({'trackId' : trackId});
-    debugger;
-    var songId = selectedSong.id;
-    var songToPlaylistUrl = '/playlist/' + playlistId + '/add_song';
-    var songToPlaylist = new App.Models.SongsToPlaylist({url: songToPlaylistUrl, defaults: {id: songId}});
-    songToPlaylist.save();
+        $.ajax({
+          url: songToPlaylistUrl,
+          method: 'PUT',
+          data: {songId: songId}
+        }).done(function() {
+          App.playlistSongsView.updatePlaylist();
+          
+        });
+
+      }});
+      
+    }});
   }
 });

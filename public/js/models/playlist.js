@@ -1,5 +1,5 @@
 App.Models.Playlist = Backbone.Model.extend({
-	intialize: function() {
+	initialize: function() {
 		console.log('Created: Playlist Model');
 	}
 });

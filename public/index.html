@@ -17,7 +17,6 @@
   <script src='js/models/collab_artist.js'></script>
   <script src='js/models/playlist.js'></script>
   <script src='js/models/playlist_song.js'></script>
-  <script src='js/models/songs_to_playlist.js'></script>
   <script src='js/models/song.js'></script>
 
   <script src='js/collections/main_artists.js'></script>
@@ -78,7 +77,7 @@
 
 <!-- Collab Artist -->
   <template id='collab-artist-template'>
-    <div class='collab-artist' data-artist-id='{{artistId}}'>
+    <div class='collab-artist' data-artist-name='{{artistName}}' data-artist-id='{{artistId}}'>
       <img src='{{artistImg}}' alt='{{artistName}}'>
       <h2 class='name'>{{artistName}}</h2>
       <ul class='track-list'>

@@ -3,5 +3,5 @@ App.Collections.PlaylistSongs = Backbone.Collection.extend({
 		console.log('Created: Playlist Songs Collection');
 	},
 
-	model: App.Models.PlaylistSong
+	model: App.Models.PlaylistSongs
 });

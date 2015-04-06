@@ -1,5 +1,5 @@
 App.Collections.Songs = Backbone.Collection.extend({
-	intialize: function() {
+	initialize: function() {
 		console.log('Created: Songs Collection');
 	},
 

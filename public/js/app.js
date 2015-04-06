@@ -7,7 +7,6 @@ var App = {
 
 $(function() {
   console.log('Loaded: app.js');
-
   App.mainArtistsCollection = new App.Collections.MainArtists();
   App.collabArtistsCollection = new App.Collections.CollabArtists();
   App.playlistCollection = new App.Collections.Playlist();
