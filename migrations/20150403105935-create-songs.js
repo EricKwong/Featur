@@ -16,6 +16,12 @@ module.exports = {
       },
       trackUri: {
         type: DataTypes.STRING
+      },
+      collabArtist: {
+        type: DataTypes.STRING
+      },
+      mainArtist: {
+        type: DataTypes.STRING
       }
     }).done(done);
   },

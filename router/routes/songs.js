@@ -11,9 +11,17 @@ router.use(bodyParser());
 
 router.get('/', function (req, res) {
 	Song
-		.create(req.body)
-		.then(function(newSong) {
-			res.send(newSong);
+		.findAll()
+		.then(function(songs) {
+			res.send(songs);
+		});
+});
+
+router.post('/', function (req, res) {
+	Song
+		.findOrCreate({where: req.body})
+		.then(function(song) {
+			res.send(song);
 		});
 });
 

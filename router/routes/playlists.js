@@ -27,7 +27,7 @@ router.get('/:id/songs', function (req, res) {
 			include: [Song]
 		})
 		.then(function(playlist) {
-			res.send(playlist);
+			res.send(playlist.songs);
 		});
 });
 
