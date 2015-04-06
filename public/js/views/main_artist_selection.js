@@ -14,7 +14,7 @@ App.Views.MainArtistSelection = Backbone.View.extend({
 
   className: 'main-artist-selection',
 
-  tagName: 'div',
+  tagName: 'span',
 
   render: function() {
     this.$el.html(this.mainArtistTemplate(this.model.toJSON()));

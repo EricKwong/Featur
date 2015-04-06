@@ -26,7 +26,7 @@ header {
   width: 100%;
   height: 175;
   background-color: slategray;
-  margin-bottom: 25px;
+  margin-bottom: 50px;
   transition: all 6s ease;
   /*z-index: -1;*/
 }
@@ -106,13 +106,16 @@ button:hover {
 
 #main-artist-search-results {
   margin: 0 7.5%;
+  /*display: flex;*/
+  /*justify-content: center;*/
 }
 
 .main-artist-selection {
+  display: inline-block;
   border: 1px solid lightgray;
   padding: 10px;
   margin: 15px 2.5% 20px 2.5%;
-  float: left;
+  /* float: left; */
   letter-spacing: .5px;
   transition: all 0.75s ease;
 }
@@ -123,13 +126,15 @@ button:hover {
   cursor: pointer;
 }
 
-/* Artist Containers */
+/* Main Artist Container */
 
 #main-artist-container {
   /*display: inline-block;*/
   margin: auto 0;
   width: 100%;
 }
+
+/* Collab Artist Container */
 
 #collab-artist-container {
   /*border: 1px solid blue;*/
@@ -147,7 +152,15 @@ button:hover {
   display: inline-block;
 }
 
+/* Tracks */
+
+ul.track-list {
+  display: none;
+}
+
 li {
+  display: flex;
+  justify-content: center;
   font-size: 13px;
   color: lightgray;
   list-style-type: none;
@@ -161,4 +174,16 @@ li {
 button.save-track {
   display: inline;
   float: right;
+}
+
+/* Footer */
+
+.footer {
+  align-self: flex-end;
+}
+
+.footer p {
+  color: gray;
+  font-size: 12px;
+  margin: 20px;
 }
