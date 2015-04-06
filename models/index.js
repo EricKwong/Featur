@@ -29,3 +29,20 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 module.exports = db;
+
+// require statements and variable declarations
+// ...
+
+if (process.env.HEROKU_POSTGRESQL_PINK_URL) {
+    // the application is executed on Heroku ... use the postgres database
+    sequelize = new Sequelize(process.env.HEROKU_POSTGRESQL_PINK_URL, {
+      dialect:  'postgres',
+      protocol: 'postgres',
+      logging:  true //false
+    })
+  } else {
+    var sequelize = new Sequelize(config.database, config.username, config.password, config);
+  }
+
+// var db = {}
+// ...
