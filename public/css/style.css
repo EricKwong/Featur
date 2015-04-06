@@ -84,28 +84,62 @@ button:hover {
 
 /* Playlist Input */
 
+#expand-down {
+  width: 0; 
+  height: 0; 
+  margin: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid lightgrey;
+  position: absolute;
+  right: 1.5%;
+  top: 5%;
+}
+
+#collapse-up {
+  border-color: lightgrey transparent;
+  border-style: solid;
+  border-width: 0px 10px 10px 10px;
+  height: 0px;
+  width: 0px;
+  position: absolute;
+  right: 1.5%;
+  top: 5%;
+}
+
 #playlist {
   margin-top: 5px;
+  margin-right: 25px;
   float: right;
-  width: 40%;
+  width: 30%;
+  height: 320px;
+  overflow: hidden;
+  position: relative;
 }
 
 #listed-songs {
-  padding: 0;
-  margin: 0 0 0 45px;
-  width: 490px;
-  height: 270px;
-  overflow: scroll;
+  text-align: left;
+  position: relative;
+  padding: 5px;
+  margin: 10px 0 0 30px;
+  width: auto;
+  height: 100%;
+  overflow: auto;
   background-color: lightgrey;
 }
 
 .playlist-song {
   color: white;
+  padding: 0;
+  margin: 7px 2px 7px 3px;
+  height: 100%;
+  width: inherit;
 }
 
 #playlist-name-input {
   width: 50%;
   border: 1px solid lightgray;
+  margin: 0;
 }
 
 #playlist-dropdown {
