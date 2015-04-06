@@ -19,22 +19,16 @@ router.get('/:artist_id', function (req, res) {
 
     var albumIds = body.items.map( function (album) { return album.id } );
     var first20  = albumIds.slice(0,20).join();
-    // var second20 = albumIds.slice(20,40).join();
+    var second20 = albumIds.slice(20,40).join();
     // var third20  = albumIds.slice(40,50);
 
     if ( albumIds.length === 0 ) {
       console.log("THERE ARE NO ALBUMS");
-
       var noCollabs = [{
-        artistName: 'SORRY! No featured collaborators are available for this artist...'
-        // artistId: artist.id,
-        // track: [{ 
-        //   trackName: track.name,
-        //   trackId: track.id,
-        //   trackUri: track.uri
-        // }],
+        artistName: 'SORRY! This artist has declined to include their album data on this service. * Womp Womp *',
+        artistImg: 'https://lh5.ggpht.com/xwwKuKeuc-9ly3Kxuiek_3GHfXLl7ZDeCPLj4UVkiWtyk_koCv35_I96SVgaZNb-_HY=h900'
       }];
-
+      // Send Error message to front end
       res.send(noCollabs);
 
     } else {
