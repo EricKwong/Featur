@@ -85,9 +85,22 @@ button:hover {
 /* Playlist Input */
 
 #playlist {
-  margin-top: 25px;
+  margin-top: 5px;
   float: right;
   width: 40%;
+}
+
+ul #listed-songs {
+  padding: 0;
+  margin: 0 0 0 45px;
+  width: 490px;
+  height: 270px;
+  overflow: scroll;
+  background-color: lightgrey;
+}
+
+.playlist-song {
+  color: white;
 }
 
 #playlist-name-input {
