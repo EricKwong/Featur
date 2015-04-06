@@ -8,12 +8,25 @@ App.Views.CollabArtist = Backbone.View.extend({
   },
 
   events: {
-  	'click .save-track' : 'saveSong'
+  	'click .save-track' : 'saveSong',
+    'click .make-main'  : 'makeMain'
   },
 
   render: function() {
   	this.$el.html(this.collabArtistTemplate(this.model.toJSON()));
   },
+
+  makeMain: function() {
+    var clickedCollab = this.$el.find('div.collab-artist');
+    var artistId = clickedCollab.data('artist-id');
+    var artistName = clickedCollab.data('artist-name');
+    var artistImg = clickedCollab.data('artist-img');
+    $('#main-artist-container').empty();
+    $('#collab-artist-container').empty();
+    App.collabArtistsView.getCollabs('/get_collabs/' + artistId);
+    App.mainArtistsView.showMainArtist(artistId, artistImg, artistName);
+  },
+
 
   saveSong: function(clicked) {
   	var clickedTrack = clicked.currentTarget;

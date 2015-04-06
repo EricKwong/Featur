@@ -53,7 +53,6 @@
       </section>
 
     </header>
-    
 
     <!-- <div class='footer'>
       <p>Made with &hearts; by Emily, Eric & John.</p>
@@ -84,9 +83,10 @@
 
 <!-- Collab Artist -->
   <template id='collab-artist-template'>
-    <div class='collab-artist' data-artist-name='{{artistName}}' data-artist-id='{{artistId}}'>
+    <div class='collab-artist' data-artist-name='{{artistName}}' data-artist-id='{{artistId}}' data-artist-img='{{artistImg}}'>
       <div class='collab circular-img' style='background-image: url({{artistImg}})' alt='{{artistName}}'></div>
       <h2 class='name'>{{artistName}}</h2>
+      <button class='make-main'>Make Main Artist</button>
       <ul class='track-list'>
         {{#each track}}
           <li data-track-id='{{trackId}}' data-track-uri='{{trackUri}}'>
