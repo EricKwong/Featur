@@ -10,12 +10,16 @@ var spotify = new SpotifyApi();
 // Router to get all tracks for collaborating artists, based on main artist ID
 router.get('/:artist_id', function (req, res) {
 
-  // Request to get albumIds from artistID
+  // Request to get albumIds from artistID 
   request({
-    uri: 'https://api.spotify.com/v1/artists/'+ req.params.artist_id + '/albums?market=US&limit=50&album_type=album,single', 
+    uri: 'https://api.spotify.com/v1/artists/'+ req.params.artist_id + '/albums?limit=50&album_type=album,single', 
     method: 'GET',
     json: true
   }, function (error, response, body) {
+
+    // ############################################
+    // ########  FUNCTION DECLARATIONS  ###########
+    // ############################################
 
     // Helper function for dealing with undefined image urls
     var undefinedCheck = function(image) {
@@ -29,7 +33,6 @@ router.get('/:artist_id', function (req, res) {
     // Large Function to eliminate redundant code for nested calls
     // Creates final array of collab artist objects based on array of all track objects
     var createCollabArtists = function(allTracks) {
-
       // Create objects linking each artist to each track they appear on
       var artistAndTrack = [];
       allTracks.forEach(function(track) {
@@ -76,13 +79,11 @@ router.get('/:artist_id', function (req, res) {
           }
         }
       };
-
       
-
+      // Request to obtain artist image URLs 
       // Limit number of collaborators to 50 (maximum for acquiring artist data from API)
       var collabArtists = collabArtists.slice(0,50);
       var collabIds = collabArtists.map(function (a) {return a.artistId});
-      // Request to obtain artist image URLs
       request({
         uri: 'https://api.spotify.com/v1/artists?ids=' + collabIds.join(),
         method: 'GET',
@@ -92,18 +93,34 @@ router.get('/:artist_id', function (req, res) {
         var artistArray = body.artists;
         for (var i = 0; i < artistArray.length; i++) {
           // call to helper fxn to test for undefined urls in API
-          var imgUrl = undefinedCheck(artistArray[i].images[1]);
+          var imgUrl = undefinedCheck(artistArray[i].images[0]);
           collabArtists[i].artistImg = imgUrl;
+
         };
-        
         // Remove first object corresponding to mainArtist
         collabArtists.shift();
-        // Send response
-        res.send(collabArtists); 
+        
+        if ( collabArtists.length === 0 ) {
+          console.log("THERE ARE NO COLLABS");
+          var noCollabs = [{
+            artistName: 'No featured artists were found...',
+            artistImg: 'https://lh5.ggpht.com/xwwKuKeuc-9ly3Kxuiek_3GHfXLl7ZDeCPLj4UVkiWtyk_koCv35_I96SVgaZNb-_HY=h900'
+          }];
+          res.send(noCollabs);
+
+        } else {
+          // Send response
+          res.send(collabArtists); 
+         
+        }
 
       });
       
-    };
+    }; // END FUNCTION DECLARATION
+
+    // ############################################
+    // ########  BEGIN MAIN ROUTER LOGIC ##########
+    // ############################################
 
     var albumIds = body.items.map( function (album) { return album.id } );
     var first20  = albumIds.slice(0,20).join();
@@ -111,15 +128,14 @@ router.get('/:artist_id', function (req, res) {
 
     if ( albumIds.length === 0 ) {
       console.log("THERE ARE NO ALBUMS");
-      var noCollabs = [{
-        artistName: 'SORRY! This artist has declined to include their album data on this service. * Womp Womp *',
+      var noAlbums = [{
+        artistName: 'SORRY! No album data found for this artist. Try selecting an artist name listing only one artist.',
         artistImg: 'https://lh5.ggpht.com/xwwKuKeuc-9ly3Kxuiek_3GHfXLl7ZDeCPLj4UVkiWtyk_koCv35_I96SVgaZNb-_HY=h900'
       }];
       // Send Error message to front end
-      res.send(noCollabs);
+      res.send(noAlbums);
 
     } else {
-
       // #######  Request to get all album information for first 20 albums #######
       request({
         uri: 'https://api.spotify.com/v1/albums?ids=' + first20, 
@@ -144,7 +160,7 @@ router.get('/:artist_id', function (req, res) {
             createCollabArtists(trackOfFirst20);
 
           } else {
-            // Otherwise, grab data for next 20 albums
+            // ####### Otherwise, request to grab data for next 20 albums #######
             request({
               uri: 'https://api.spotify.com/v1/albums?ids=' + second20, 
               method: 'GET',
@@ -161,20 +177,17 @@ router.get('/:artist_id', function (req, res) {
                 });
 
                 var allTracks = trackOfFirst20.concat(trackOfSecond20);
-
                 createCollabArtists(allTracks);
 
               });
 
           } // END ELSE
 
-
-
-        }); 
+        }); // END Request
       
-    } // END OUTER IF ... ELSE
+    } // END IF ... ELSE for # of albums
 
-  }); // END REQUEST FOR ARTIST'S ALBUMS
+  }); // END Request for albums's artists
 
 }); // END ROUTER
       
