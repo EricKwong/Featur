@@ -148,7 +148,8 @@ button:hover {
 }
 
 li {
-  font-size: 12px;
+  font-size: 13px;
+  color: lightgray;
   list-style-type: none;
   /* margin: 20px; */
   /* width: auto; */
