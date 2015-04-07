@@ -68,10 +68,10 @@ App.Views.CollabArtist = Backbone.View.extend({
 
   showTracks: function() {
     this.hideAllTracks();
-    this.$('.track-list').show();
+    this.$('.track-list').removeClass('hide');
   },
 
   hideAllTracks: function() {
-    $('.track-list').hide();
+    $('.track-list').addClass('hide');
   }
 });
