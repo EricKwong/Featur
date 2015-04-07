@@ -14,8 +14,8 @@ $(function() {
   
   App.mainArtistsView = new App.Views.MainArtists({collection: App.mainArtistsCollection});
   App.collabArtistsView = new App.Views.CollabArtists({collection: App.collabArtistsCollection});
-  App.playlistView = new App.Views.Playlist({collection: App.playlistCollection});
   App.playlistSongsView = new App.Views.PlaylistSongs({collection: App.playlistSongsCollection});
+  App.playlistView = new App.Views.Playlist({collection: App.playlistCollection});
 });
 
 
