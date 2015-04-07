@@ -253,7 +253,7 @@ li.playlist-song {
 
 .collab-artist {
   height: 325px;
-  margin: 25px 1.25% 75px;
+  margin: 25px 1.25% 30px;
   padding-left: 5px;
   padding-right: 5px;
   width: 21.25%;
@@ -268,9 +268,9 @@ ul.track-list {
   margin: 25px 0 50px;
   padding: 0;
   overflow-y: scroll;
-  height: 75px;
-  /* top: -10px; */
+  height: 170px;
   position: relative;
+  background: rgba(255, 255, 255, .98);
 }
 
 li {
