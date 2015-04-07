@@ -41,7 +41,7 @@ App.Views.Playlist = Backbone.View.extend({
 	showPlaylistSongs: function() {
 		var playlistId = this.$('#playlist-dropdown option:selected').data('playlist-id');
 		App.playlistSongsView.showPlaylist(playlistId);
-		$('#collapse-up').attr('id', 'expand-down');
+		$('#expand-down').attr('id', 'collapse-up');
 		this.$('#listed-songs').show();
 	},
 

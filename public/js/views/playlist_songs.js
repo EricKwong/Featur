@@ -20,7 +20,7 @@ App.Views.PlaylistSongs = Backbone.View.extend({
 
 	showPlaylist: function(playlistId) {
 		this.collection.url = '/playlists/' + playlistId + '/songs';
-		this.collection.fetch({reset: true});
+		this.collection.fetch({reset: true});		
 	},
 
 	updatePlaylist: function() {
