@@ -20,7 +20,7 @@ featur relies on the data from Spotify's API.
 ### Resources
 ERD
 
-https://www.lucidchart.com/invitations/accept/3b718256-a4dc-4f60-a915-df8a56ceebfa
+http://cl.ly/image/3D2r2y1E1p2I
 
 Trello
 
