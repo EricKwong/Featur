@@ -10,7 +10,8 @@ App.Views.MainArtists = Backbone.View.extend({
   },
 
   events: {
-    'click #search-button' : 'searchArtist'
+    'click #search-button' : 'searchArtist',
+    'keypress #search-input' : 'searchByEnter'
   },
 
   render: function() {
@@ -27,6 +28,12 @@ App.Views.MainArtists = Backbone.View.extend({
     };
     var artistSelection = new App.Views.MainArtistSelection({ model: artistModel, attributes: artistData });
     this.$('#main-artist-search-results').append(artistSelection.$el);
+  },
+
+  searchByEnter: function(e) {
+    if (e.which === 13) {
+      this.searchArtist();
+    }
   },
 
   searchArtist: function() {

@@ -7,10 +7,10 @@ var App = {
 
 $(function() {
   console.log('Loaded: app.js');
-  App.mainArtistsCollection = new App.Collections.MainArtists();
-  App.collabArtistsCollection = new App.Collections.CollabArtists();
-  App.playlistCollection = new App.Collections.Playlist();
-  App.playlistSongsCollection = new App.Collections.PlaylistSongs();
+  App.mainArtistsCollection = new App.Collections.MainArtists;
+  App.collabArtistsCollection = new App.Collections.CollabArtists;
+  App.playlistCollection = new App.Collections.Playlist;
+  App.playlistSongsCollection = new App.Collections.PlaylistSongs;
   
   App.mainArtistsView = new App.Views.MainArtists({collection: App.mainArtistsCollection});
   App.collabArtistsView = new App.Views.CollabArtists({collection: App.collabArtistsCollection});
