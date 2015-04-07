@@ -1,22 +1,20 @@
 var express    = require('express'),
     router     = express.Router(),
     logger     = require('morgan'),
-    SpotifyApi = require('spotify-web-api-node'),
     request    = require('request');
 
 router.use(logger('dev'));
 
-var spotify = new SpotifyApi();
-
 // Router to get all tracks for collaborating artists, based on main artist ID
 router.get('/:artist_id', function (req, res) {
-
+  var mainArtistId = req.params.artist_id;
   // Request to get albumIds from artistID 
   request({
-    uri: 'https://api.spotify.com/v1/artists/'+ req.params.artist_id + '/albums?limit=50&album_type=album,single', 
+    uri: 'https://api.spotify.com/v1/artists/'+ mainArtistId + '/albums?limit=50&album_type=album,single', 
     method: 'GET',
     json: true
   }, function (error, response, body) {
+
     /*
     ############################################
     ########  FUNCTION DECLARATIONS  ###########
@@ -35,7 +33,7 @@ router.get('/:artist_id', function (req, res) {
     Large Function to eliminate redundant code for nested calls
     Creates final array of collab artist objects based on array of all track objects
     */    
-    var createCollabArtists = function(allTracks) {
+    var createCollabArtists = function(allTracks, mainArtistId) {
       // Create objects linking each artist to each track they appear on
       var artistAndTrack = [];
       allTracks.forEach(function(track) {
@@ -49,6 +47,7 @@ router.get('/:artist_id', function (req, res) {
               trackId: track.id,
               trackUri: track.uri
             }],
+            trackNum: 1
           };
 
           artistAndTrack.push(artistInfo);
@@ -80,13 +79,14 @@ router.get('/:artist_id', function (req, res) {
           var trackIndex = tracksAlreadyThere.indexOf(trackToPush);
           if ( trackIndex === -1 ) {
             collabArtists[artIndex].track.push(currentTrack);
+            // Iterate number of tracks for later sorting
+            collabArtists[artIndex].trackNum++;
 
           }
         }
       };
       /*      
-      Request to obtain artist image URLs 
-      Limit number of collaborators to 50 (maximum for acquiring artist data from API)
+      Request to obtain artist image URLs; Limit number of collaborators to 50 (maximum for acquiring artist data from API)
       */      
       var collabArtists = collabArtists.slice(0,50);
       var collabIds = collabArtists.map(function (a) {return a.artistId});
@@ -103,14 +103,21 @@ router.get('/:artist_id', function (req, res) {
           collabArtists[i].artistImg = imgUrl;
 
         };
-        // Remove first object corresponding to mainArtist
-        collabArtists.shift();
-        
-        /*
-        count # of tracks for each collab artist
-        sort collab artist array based on # of tracks
-        */
-        
+
+        // Helper fxn for sorting based on number of tracks
+        var compare = function(a,b) {
+          if ( a.trackNum < b.trackNum ) return 1;
+          if ( a.trackNum > b.trackNum ) return -1;
+          return 0;
+        };
+        // Sort collab artist array based on # of tracks
+        collabArtists.sort(compare);
+
+        // Remove main artist object corresponding to mainArtist
+        collabArtists = collabArtists.filter(function (artist) {
+          return artist.artistId !== mainArtistId;
+        });
+
         if ( collabArtists.length === 0 ) {
           console.log("THERE ARE NO COLLABS");
           var noCollabs = [{
@@ -120,7 +127,7 @@ router.get('/:artist_id', function (req, res) {
           res.send(noCollabs);
 
         } else {
-          // Send response
+          // SEND RESPONSE TO FRONT END (FINALLY!!!)
           res.send(collabArtists); 
          
         }
@@ -128,6 +135,7 @@ router.get('/:artist_id', function (req, res) {
       });
       
     }; // END FUNCTION DECLARATION
+
     /*
     ############################################
     ########  BEGIN MAIN ROUTER LOGIC ##########
@@ -140,7 +148,7 @@ router.get('/:artist_id', function (req, res) {
     if ( albumIds.length === 0 ) {
       console.log("THERE ARE NO ALBUMS");
       var noAlbums = [{
-        artistName: 'SORRY! No album data found for this artist. Try selecting an artist name listing only one artist.',
+        artistName: 'SORRY! No data found! Try selecting a name with only one main artist.',
         artistImg: 'https://lh5.ggpht.com/xwwKuKeuc-9ly3Kxuiek_3GHfXLl7ZDeCPLj4UVkiWtyk_koCv35_I96SVgaZNb-_HY=h900'
       }];
       // Send Error message to front end
@@ -166,9 +174,9 @@ router.get('/:artist_id', function (req, res) {
           });
 
           // If there are less than 20 albums, no further requests are needed
-          if ( albumIds.length < 20 ) {
+          if ( albumIds.length <= 20 ) {
             // Call function to create Final Output and send to Front End
-            createCollabArtists(trackOfFirst20);
+            createCollabArtists(trackOfFirst20, mainArtistId);
 
           } else {
             // ####### Otherwise, request to grab data for next 20 albums #######
@@ -188,7 +196,7 @@ router.get('/:artist_id', function (req, res) {
                 });
 
                 var allTracks = trackOfFirst20.concat(trackOfSecond20);
-                createCollabArtists(allTracks);
+                createCollabArtists(allTracks, mainArtistId);
 
               });
 

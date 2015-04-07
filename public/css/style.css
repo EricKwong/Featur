@@ -88,6 +88,11 @@ button:hover {
   border: 1px solid snow;
 }
 
+#title-link {
+  color: white;
+  text-decoration: none;
+}
+
 /* Playlist */
 
 #playlist {
@@ -301,8 +306,8 @@ p.collab-track-name {
   margin: 0;
   float: left;
   position: relative;
-  width: 70%;
   margin-left: 10px;
+  width: 90%;
 }
 
 /* Footer */
@@ -316,4 +321,14 @@ p.collab-track-name {
   padding: 15px;
   background: #f8f8f8;
   letter-spacing: .5px;
+}
+
+
+/* Spotify Plug-in */
+iframe {
+  float:right;
+  right: 2%;
+  top: 16%;
+  display: inline-block;
+  position: absolute;
 }
