@@ -88,6 +88,11 @@ button:hover {
   border: 1px solid snow;
 }
 
+#title-link {
+  color: white;
+  text-decoration: none;
+}
+
 /* Playlist */
 
 #playlist {
