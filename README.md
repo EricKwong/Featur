@@ -9,12 +9,12 @@ featur relies on the data from Spotify's API.
 
 ### How to Use
 1. Search for an artist.
-2. Choose an artist from your search results, most likely the first result.
+2. Choose an artist from your search results (most likely the first result).
 3. Marvel in the glory of all the collaborations!
 3. Click the collab artist's picture to see the tracks the two artists have recorded together.
 4. Create a new playlist. 
 5. Add songs that you like to your playlist when you are checking out collaborated tracks.
-6. Sign in to Spotify to listen to your playlist.
+6. Sign in to Spotify to listen to your playlist. You may need to open/close your playlist to refresh.
 7. Continue searching by making a collaborator the main artist searched.
 
 ### Resources
@@ -24,7 +24,7 @@ https://www.lucidchart.com/invitations/accept/3b718256-a4dc-4f60-a915-df8a56ceeb
 
 Trello
 
-https://trello.com/b/wdvdqx8p/featr
+https://trello.com/b/wdvdqx8p/featur
 
 Spotify API
 
