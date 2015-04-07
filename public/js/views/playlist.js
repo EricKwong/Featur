@@ -41,6 +41,8 @@ App.Views.Playlist = Backbone.View.extend({
 	showPlaylistSongs: function() {
 		var playlistId = this.$('#playlist-dropdown option:selected').data('playlist-id');
 		App.playlistSongsView.showPlaylist(playlistId);
+		$('#collapse-up').attr('id', 'expand-down');
+		this.$('#listed-songs').show();
 	},
 
 	showPlaylist: function(clicked) {
@@ -60,6 +62,7 @@ App.Views.Playlist = Backbone.View.extend({
 			$('iframe').attr('src', pluginRootUrl + songIds.join());
 		};
 		
+
 	},
 
 	hidePlaylist: function(clicked) {
