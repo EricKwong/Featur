@@ -33,8 +33,9 @@ App.Views.Playlist = Backbone.View.extend({
 		if (playlistName === "") {
 			return
 		};
-		this.collection.create({name: playlistName});
-		this.collection.fetch();
+		this.collection.create({name: playlistName}, success: function() {
+			this.collection.fetch();
+		});
 		this.$('#playlist-name-input').val('');
 	},
 
