@@ -137,9 +137,9 @@ button:hover {
 .playlist-song {
   color: white;
   padding: 0;
-  margin: 7px 2px 7px 3px;
-  height: 100%;
-  width: inherit;
+  margin: 7px 15px 7px 15px;
+  height: 12px;
+  width: 90%;
 }
 
 #playlist-name-input {
@@ -159,9 +159,22 @@ button:hover {
   border-radius: none;
 }
 
+li.playlist-song {
+  width: 90%;
+  display: inline-block;
+}
+
 .delete-song {
   color: white;
   float: right;
+  transition: all .75s ease;
+  margin: 0;
+  display: inline-block;
+}
+
+.delete-song:hover {
+  color: indianred;
+  cursor: pointer;
 }
 
 .hide {
@@ -275,11 +288,12 @@ button.save-track {
   width: 25px;
   border: none;
   padding: 0 0 25px 0;
-  font-size: 25px;
+  font-size: 22px;
+  font-weight: 100;
 }
 
 .save-track:hover {
-  background-color: lightslategray;
+  background-color: mediumaquamarine;
   color: white;
 }
 
