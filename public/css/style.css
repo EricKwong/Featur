@@ -332,3 +332,17 @@ iframe {
   display: inline-block;
   position: absolute;
 }
+
+
+/* John's Changes */
+
+input#playlist-name-input {
+  width: 30%;
+  display: inline-block;
+}
+
+#collapse-up, #collapse-down {
+  display: inline-block;
+  margin-left: 10px;
+  float:right;
+}

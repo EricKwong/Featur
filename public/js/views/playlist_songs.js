@@ -20,7 +20,20 @@ App.Views.PlaylistSongs = Backbone.View.extend({
 
 	showPlaylist: function(playlistId) {
 		this.collection.url = '/playlists/' + playlistId + '/songs';
-		this.collection.fetch({reset: true});		
+		this.collection.fetch({reset: true, success: function() {
+			// Take track ids from shown playlist and show spotify plugin
+		var songIds       = [],
+			  songElArray   = this.$('.playlist-song'),
+			  pluginRootUrl =	'https://embed.spotify.com/?uri=spotify:trackset:FeaturPlaylist:';
+
+		for (var i = 0; i < songElArray.length; i++) {
+			songIds.push( $(songElArray[i]).data('track-id') );
+		};
+		
+		if ( songIds.length !== 0 ) {
+			$('iframe').attr('src', pluginRootUrl + songIds.join());
+		};
+		}});		
 	},
 
 	updatePlaylist: function() {
