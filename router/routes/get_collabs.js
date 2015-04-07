@@ -16,6 +16,7 @@ router.get('/:artist_id', function (req, res) {
     method: 'GET',
     json: true
   }, function (error, response, body) {
+
     /*
     ############################################
     ########  FUNCTION DECLARATIONS  ###########
@@ -142,6 +143,8 @@ router.get('/:artist_id', function (req, res) {
     ########  BEGIN MAIN ROUTER LOGIC ##########
     ############################################
     */
+
+
     var albumIds = body.items.map( function (album) { return album.id } );
     var first20  = albumIds.slice(0,20).join();
     var second20 = albumIds.slice(20,40).join();
@@ -149,7 +152,7 @@ router.get('/:artist_id', function (req, res) {
     if ( albumIds.length === 0 ) {
       console.log("THERE ARE NO ALBUMS");
       var noAlbums = [{
-        artistName: 'SORRY! No album data found for this artist. Try selecting an artist name listing only one artist.',
+        artistName: 'SORRY! This service does not have any data for this artist\'s own albums (i.e., not a compilation album). Also try selecting a name listing only one main artist.',
         artistImg: 'https://lh5.ggpht.com/xwwKuKeuc-9ly3Kxuiek_3GHfXLl7ZDeCPLj4UVkiWtyk_koCv35_I96SVgaZNb-_HY=h900'
       }];
       // Send Error message to front end
@@ -175,7 +178,7 @@ router.get('/:artist_id', function (req, res) {
           });
 
           // If there are less than 20 albums, no further requests are needed
-          if ( albumIds.length < 20 ) {
+          if ( albumIds.length <= 20 ) {
             // Call function to create Final Output and send to Front End
             createCollabArtists(trackOfFirst20, mainArtistId);
 
