@@ -1,9 +1,11 @@
 # featur
 
-Featur is an app featuring the collaboration between Eric, John and Emily.
+featur is an app featuring the collaboration of Eric, John and Emily.
 
 ### Purpose
-Featur allows a user to search for a main artist to see the tracks of other artists he or she has collaborated on. It relies on the data from Spotify's API.
+featur allows a user to search for an artist and his or her collaborators to see what tracks the two have recorded together. Make playlists based on your results, or search for a collaborator as the main artist to explore the six degrees of separation between artists.
+
+featur relies on the data from Spotify's API.
 
 ### How to Use
 1. Search for an artist.
@@ -11,8 +13,9 @@ Featur allows a user to search for a main artist to see the tracks of other arti
 3. Marvel in the glory of all the collaborations!
 3. Click the collab artist's picture to see the tracks the two artists have recorded together.
 4. Create a new playlist. 
-5. Add songs to your playlist when you are checking out tracks.
-6. Listen to your playlist!
+5. Add songs that you like to your playlist when you are checking out collaborated tracks.
+6. Sign in to Spotify to listen to your playlist.
+7. Continue searching by making a collaborator the main artist searched.
 
 ### Resources
 ERD
