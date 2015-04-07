@@ -5,11 +5,13 @@ App.Views.CollabArtist = Backbone.View.extend({
     console.log('Created: CollabArtist View');
     this.collabArtistTemplate = Handlebars.compile($('#collab-artist-template').html());
     this.render();
+    this.hideAllTracks();
   },
 
   events: {
   	'click .save-track' : 'saveSong',
-    'click .make-main'  : 'makeMain'
+    'click .make-main'  : 'makeMain',
+    'click .collab, .circlar-img' : 'showTracks'
   },
 
   render: function() {
@@ -44,25 +46,32 @@ App.Views.CollabArtist = Backbone.View.extend({
       mainArtist: mainArtist
     };
     
-    var songsCollection = new App.Collections.Songs();
-    songsCollection.create(songData, {success: function() {
-      songsCollection.fetch({success: function() {
+    var songsCollection = new App.Collections.Songs;
+    songsCollection.create(songData, {success: function(data) {
 
-        var playlistId = $('#playlist-dropdown option:selected').data('playlist-id');
-        var selectedSong = songsCollection.findWhere({'trackId' : trackId});
-        var songId = selectedSong.id;
-        var songToPlaylistUrl = '/playlists/' + playlistId + '/add_song';
+      var playlistId = $('#playlist-dropdown option:selected').data('playlist-id');
+      
+      var songId = data.toJSON()[0].id;
 
-        $.ajax({
-          url: songToPlaylistUrl,
-          method: 'PUT',
-          data: {songId: songId}
-        }).done(function() {
-          App.playlistSongsView.updatePlaylist();
-        });
+      var songToPlaylistUrl = '/playlists/' + playlistId + '/add_song';
 
-      }});
+      $.ajax({
+        url: songToPlaylistUrl,
+        method: 'PUT',
+        data: { songId: songId }
+      }).done(function() {
+        App.playlistSongsView.updatePlaylist();
+      });
 
     }});
+  },
+
+  showTracks: function() {
+    this.hideAllTracks();
+    this.$('.track-list').show();
+  },
+
+  hideAllTracks: function() {
+    $('.track-list').hide();
   }
 });
