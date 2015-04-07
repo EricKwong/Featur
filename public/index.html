@@ -3,7 +3,7 @@
 <head>
   <meta charset='UTF-8'>
   <title>featr</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel='stylesheet' href='css/style.css'>
   <!-- Libraries -->
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
   <script src='http://underscorejs.org/underscore-min.js'></script>
@@ -41,23 +41,18 @@
       <h1>featur</h1>
     
       <div class='search-area'>
-        <input id='search-input' type='text' placeholder='Search Artist'>
+        <input id='search-input' type='text' placeholder='Search Artist...'>
         <button id='search-button'>Search</button> 
       </div>
 
       <section id='playlist'>
         <select id='playlist-dropdown'></select>
-        <input type="text" id='playlist-name-input' placeholder='Playlist Name'>
+        <input type='text' id='playlist-name-input' placeholder='Create Playlist...'>
         <button id='create-playlist'>Create</button>
-        <div id="expand-down"></div>
+        <div id='expand-down'></div>
         <ul id='listed-songs'></ul>
       </section>
-
     </header>
-
-    <!-- <div class='footer'>
-      <p>Made with &hearts; by Emily, Eric & John.</p>
-    </div> -->
 
   <!-- MAIN WINDOW-->
     <section id='main-artist-search-results'></section>
@@ -89,28 +84,31 @@
       <h2 class='name'>{{artistName}}</h2>
       <button class='make-main'>Make Main Artist</button>
       <ul class='track-list'>
-        {{#each track}}
-          <li data-track-id='{{trackId}}' data-track-uri='{{trackUri}}'>
-            {{trackName}}
-            <button class='save-track' data-track-id='{{trackId}}' data-track-uri='{{trackUri}}' data-track-name='{{trackName}}'>Save</button>
-          </li>
-        {{/each}} 
+         <div class='songs-container'> 
+          {{#each track}}
+            <li data-track-id='{{trackId}}' data-track-uri='{{trackUri}}'>
+              {{trackName}}
+              <button class='save-track' data-track-id='{{trackId}}' data-track-uri='{{trackUri}}' data-track-name='{{trackName}}'>+</button>
+            </li>
+          {{/each}}
+        </div> 
       </ul>
     </div>
   </template>
 
 <!-- Playlist -->
+  <template id='playlist-dropdown-template'>
+    <option data-playlist-id='{{id}}'>{{name}}</option>
+  </template>
 
+<!-- Playlist Song -->
+  <template id='song-template'>
+    <li class='playlist-song' data-track-id='{{trackId}}' data-track-uri='{{trackUri}}'>{{mainArtist}} feat. {{collabArtist}} - {{trackName}}</li>
+  </template>
 
-<template id='playlist-dropdown-template'>
-  <option data-playlist-id='{{id}}'>{{name}}</option>
-</template>
-
-<!-- Playlist Song template -->
-
-<template id='song-template'>
-  <li class='playlist-song' data-track-id='{{trackId}}' data-track-uri='{{trackUri}}'>{{mainArtist}} feat. {{collabArtist}} - {{trackName}}</li>
-</template>
+<!--   <div class='footer'>
+    <p>Made with &hearts; by Emily, Eric & John.</p>
+  </div> -->
 
 </body>
 </html>
