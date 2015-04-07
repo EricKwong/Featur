@@ -302,3 +302,13 @@ p.collab-track-name {
   background: #f8f8f8;
   letter-spacing: .5px;
 }
+
+
+/* Spotify Plug-in */
+iframe {
+  float:right;
+  right: 2%;
+  top: 16%;
+  display: inline-block;
+  position: absolute;
+}

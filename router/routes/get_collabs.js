@@ -1,12 +1,9 @@
 var express    = require('express'),
     router     = express.Router(),
     logger     = require('morgan'),
-    SpotifyApi = require('spotify-web-api-node'),
     request    = require('request');
 
 router.use(logger('dev'));
-
-var spotify = new SpotifyApi();
 
 // Router to get all tracks for collaborating artists, based on main artist ID
 router.get('/:artist_id', function (req, res) {
@@ -144,8 +141,6 @@ router.get('/:artist_id', function (req, res) {
     ########  BEGIN MAIN ROUTER LOGIC ##########
     ############################################
     */
-
-
     var albumIds = body.items.map( function (album) { return album.id } );
     var first20  = albumIds.slice(0,20).join();
     var second20 = albumIds.slice(20,40).join();
@@ -153,7 +148,7 @@ router.get('/:artist_id', function (req, res) {
     if ( albumIds.length === 0 ) {
       console.log("THERE ARE NO ALBUMS");
       var noAlbums = [{
-        artistName: 'SORRY! This service does not have any data for this artist\'s own albums (i.e., not a compilation album). Also try selecting a name listing only one main artist.',
+        artistName: 'SORRY! No data found! Try selecting a name with only one main artist.',
         artistImg: 'https://lh5.ggpht.com/xwwKuKeuc-9ly3Kxuiek_3GHfXLl7ZDeCPLj4UVkiWtyk_koCv35_I96SVgaZNb-_HY=h900'
       }];
       // Send Error message to front end

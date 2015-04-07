@@ -12,10 +12,10 @@ App.Views.Playlist = Backbone.View.extend({
 	el: '#playlist',
 
 	events: {
-		'click #create-playlist' : 'createPlaylist',
+		'click #create-playlist'    : 'createPlaylist',
 		'change #playlist-dropdown' : 'showPlaylistSongs',
-		'click #expand-down' : 'showPlaylist',
-		'click #collapse-up' : 'hidePlaylist'
+		'click #expand-down'        : 'showPlaylist',
+		'click #collapse-up'        : 'hidePlaylist'
 	},
 
 	render: function() {
@@ -42,11 +42,25 @@ App.Views.Playlist = Backbone.View.extend({
 		var expandTriangle = clicked.currentTarget;
 		this.$('#listed-songs').show();
 		$(expandTriangle).attr('id', 'collapse-up');
+
+		var songIds       = [],
+			  songElArray   = this.$('.playlist-song'),
+			  pluginRootUrl =	'https://embed.spotify.com/?uri=spotify:trackset:FeaturPlaylist:';
+
+		for (var i = 0; i < songElArray.length; i++) {
+			songIds.push( $(songElArray[i]).data('track-id') );
+		};
+		
+		if ( songIds.length !== 0 ) {
+			$('iframe').attr('src', pluginRootUrl + songIds.join());
+		};
+		
 	},
 
 	hidePlaylist: function(clicked) {
 		var expandTriangle = clicked.currentTarget;
 		this.$('#listed-songs').hide();
 		$(expandTriangle).attr('id', 'expand-down');
+		$('iframe').attr('src', '');
 	}
 });
