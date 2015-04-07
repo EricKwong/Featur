@@ -1,11 +1,9 @@
 var express    = require('express'),
 	router     = express.Router(),
 	logger     = require('morgan'),
-    SpotifyApi = require('spotify-web-api-node'),
     request    = require('request');
 
 router.use(logger('dev'));
-var spotify = new SpotifyApi();
 
 router.get('/:artist', function (req, res) {
 
@@ -41,10 +39,16 @@ console.log(req.params.artist)
     });
 
     // Sort results based on artist popularity
-    //
-    //
-    // End sort
-
+    
+    // Helper fxn for sorting based on popularity
+    var compare = function(a,b) {
+      if ( a.artistPop < b.artistPop ) return 1;
+      if ( a.artistPop > b.artistPop ) return -1;
+      return 0;
+    };
+    // Sort main artist results 
+    newArtists.sort(compare);
+    
     res.send(newArtists);
   });
 });
