@@ -7,6 +7,7 @@ App.Views.Playlist = Backbone.View.extend({
 		var thisView = this; 
 		this.collection.fetch({reset: true, success: function() {
 			thisView.showPlaylistSongs();
+			thisView.hidePlaylist();
 		}});
 	},
 

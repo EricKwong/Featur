@@ -1,15 +1,11 @@
 var express    = require('express'),
-	router     = express.Router(),
-	logger     = require('morgan'),
+	  router     = express.Router(),
+	  logger     = require('morgan'),
     request    = require('request');
 
 router.use(logger('dev'));
 
 router.get('/:artist', function (req, res) {
-
-console.log(req.params.artist)
-//https://api.spotify.com/v1/search?type=artist&q=buckwheat%20zydeco
-
   request({
     uri: 'https://api.spotify.com/v1/search?type=artist&q=' + req.params.artist,
     method: 'GET',
