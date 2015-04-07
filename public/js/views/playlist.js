@@ -5,6 +5,8 @@ App.Views.Playlist = Backbone.View.extend({
 		this.listenTo(this.collection, 'reset', this.render);
 		this.listenTo(this.collection, 'add', this.render);
 		this.collection.fetch({reset: true});
+		this.showPlaylistSongs();
+
 	},
 
 	el: '#playlist',

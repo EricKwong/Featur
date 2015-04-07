@@ -83,7 +83,7 @@
       <div class='collab circular-img' style='background-image: url({{artistImg}})' alt='{{artistName}}'></div>
       <h2 class='name'>{{artistName}}</h2>
       <button class='make-main'>Make Main Artist</button>
-      <ul class='track-list'>
+      <ul class='track-list hide'>
          <div class='songs-container'> 
           {{#each track}}
             <li data-track-id='{{trackId}}' data-track-uri='{{trackUri}}'>
@@ -103,7 +103,7 @@
 
 <!-- Playlist Song -->
   <template id='song-template'>
-    <li class='playlist-song' data-track-id='{{trackId}}' data-track-uri='{{trackUri}}'><p>{{mainArtist}} feat. {{collabArtist}} - {{trackName}}</p><p class='delete-song'>X</p></li>
+    <li class='playlist-song' data-db-id='{{id}}' data-track-id='{{trackId}}' data-track-uri='{{trackUri}}'><p>{{mainArtist}} feat. {{collabArtist}} - {{trackName}}</p><p class='delete-song'>X</p></li>
 
   </template>
 
