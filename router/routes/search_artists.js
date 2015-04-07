@@ -24,11 +24,17 @@ router.get('/:artist', function (req, res) {
             var artistData = {
                 artistName: artist.name,
                 artistId: artist.id,
+                artistPop: artist.popularity,
                 artistImg: undefinedCheck(imageUrl)
             };
 
             return artistData;
         });
+
+        // Sort results based on artist popularity
+        //
+        //
+        // End sort
 
         res.send(newArtists);
     });
