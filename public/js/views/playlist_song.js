@@ -5,6 +5,10 @@ App.Views.PlaylistSong = Backbone.View.extend({
 		this.render();
 	},
 
+	events: {
+		
+	},
+
 	render: function() {
 		this.$el.html(this.songTemplate(this.model.toJSON()));
 	}

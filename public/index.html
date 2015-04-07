@@ -87,7 +87,7 @@
          <div class='songs-container'> 
           {{#each track}}
             <li data-track-id='{{trackId}}' data-track-uri='{{trackUri}}'>
-              {{trackName}}
+              <p class='collab-track-name'>{{trackName}}</p>
               <button class='save-track' data-track-id='{{trackId}}' data-track-uri='{{trackUri}}' data-track-name='{{trackName}}'>+</button>
             </li>
           {{/each}}
@@ -103,7 +103,8 @@
 
 <!-- Playlist Song -->
   <template id='song-template'>
-    <li class='playlist-song' data-track-id='{{trackId}}' data-track-uri='{{trackUri}}'>{{mainArtist}} feat. {{collabArtist}} - {{trackName}}</li>
+    <li class='playlist-song' data-track-id='{{trackId}}' data-track-uri='{{trackUri}}'><p>{{mainArtist}} feat. {{collabArtist}} - {{trackName}}</p><p class='delete-song'>X</p></li>
+
   </template>
 
 <!--   <div class='footer'>

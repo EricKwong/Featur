@@ -5,6 +5,7 @@ var express    = require('express'),
     request    = require('request');
 
 router.use(logger('dev'));
+
 var spotify = new SpotifyApi();
 
 // Router to get all tracks for collaborating artists, based on main artist ID
