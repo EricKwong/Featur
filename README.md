@@ -16,12 +16,15 @@ Featur allows a user to search for a main artist to see the tracks of other arti
 
 ### Resources
 ERD
+
 https://www.lucidchart.com/invitations/accept/3b718256-a4dc-4f60-a915-df8a56ceebfa
 
 Trello
+
 https://trello.com/b/wdvdqx8p/featr
 
-Spotify API 
+Spotify API
+
 https://developer.spotify.com/web-api/
 
 
