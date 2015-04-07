@@ -9,7 +9,12 @@ body, html {
   line-height: 1.2;
   color: gray;
   font-weight: 300;
+  height: 100%;
 }
+
+/*div {
+  box-sizing: border-box;
+}*/
 
 :focus {
   outline: none;
@@ -19,6 +24,7 @@ body, html {
 h2 {
   font-weight: 300;
   color: lightslategray;
+  letter-spacing: 1px;
 }
 
 /* Header */
@@ -82,7 +88,17 @@ button:hover {
   border: 1px solid snow;
 }
 
-/* Playlist Input */
+/* Playlist */
+
+#playlist {
+  margin-top: 5px;
+  margin-right: 25px;
+  float: right;
+  width: 30%;
+  height: 320px;
+  overflow: hidden;
+  position: relative;
+}
 
 #expand-down {
   width: 0; 
@@ -105,16 +121,6 @@ button:hover {
   position: absolute;
   right: 1.5%;
   top: 5%;
-}
-
-#playlist {
-  margin-top: 5px;
-  margin-right: 25px;
-  float: right;
-  width: 30%;
-  height: 320px;
-  overflow: hidden;
-  position: relative;
 }
 
 #listed-songs {
@@ -150,6 +156,7 @@ button:hover {
   border: 0px;
   background: lightgray;
   color: snow;
+  border-radius: none;
 }
 
 /* Images */
@@ -175,14 +182,13 @@ button:hover {
   opacity: .75;
   transform: scale(1.05);
   border: none;
+  cursor: pointer;
 }
 
 /* Search Result Selection */
 
 #main-artist-search-results {
   margin: 0 7.5%;
-  /*display: flex;*/
-  /*justify-content: center;*/
 }
 
 .main-artist-selection {
@@ -190,7 +196,6 @@ button:hover {
   border: 1px solid lightgray;
   padding: 10px;
   margin: 15px 2.5% 20px 2.5%;
-  /* float: left; */
   letter-spacing: .5px;
   transition: all 0.75s ease;
 }
@@ -204,7 +209,6 @@ button:hover {
 /* Main Artist Container */
 
 #main-artist-container {
-  /*display: inline-block;*/
   margin: auto 0;
   width: 100%;
 }
@@ -212,53 +216,66 @@ button:hover {
 /* Collab Artist Container */
 
 #collab-artist-container {
-  /*border: 1px solid blue;*/
   margin: 0 7.5%;
 }
 
 .collab-artist {
   height: 325px;
-  margin: 5px 1.25% 50px;
+  margin: 25px 1.25% 75px;
   padding-left: 5px;
   padding-right: 5px;
   width: 21.25%;
   float: left;
-  /*border: 1px solid green;*/
   display: inline-block;
 }
 
 /* Tracks */
 
 ul.track-list {
-  display: none;
+  width: 100%;
+  margin: 25px 0 50px;
+  padding: 0;
+  overflow-y: scroll;
+  height: 75px;
+  /* top: -10px; */
+  position: relative;
 }
 
 li {
-  display: flex;
-  justify-content: center;
-  font-size: 13px;
-  color: lightgray;
+  font-size: 12px;
+  border-bottom: 1px solid lightgray;
   list-style-type: none;
-  /* margin: 20px; */
-  /* width: auto; */
-  /* line-height: 1.2; */
+  width: 100%;
   float: left;
-  /* display: inline-block; */
+  text-align: left;
+  transition: all 0.5s ease;
 }
 
 button.save-track {
-  display: inline;
   float: right;
+  color: darkslategray;
+  background-color: #f0f0f0;
+  height: 25px;
+  width: 25px;
+  border: none;
+  padding: 0 0 25px 0;
+  font-size: 25px;
+}
+
+.save-track:hover {
+  background-color: lightslategray;
+  color: white;
 }
 
 /* Footer */
 
 .footer {
-  align-self: flex-end;
-}
-
-.footer p {
-  color: gray;
+  bottom: 100%;
   font-size: 12px;
-  margin: 20px;
+  color: lightslategray;
+  margin: 50px auto 0 auto;
+  height: auto;
+  padding: 15px;
+  background: #f8f8f8;
+  letter-spacing: .5px;
 }
