@@ -4,9 +4,10 @@ App.Views.Playlist = Backbone.View.extend({
 		this.allPlaylistTemplate = Handlebars.compile($('#playlist-dropdown-template').html());
 		this.listenTo(this.collection, 'reset', this.render);
 		this.listenTo(this.collection, 'add', this.render);
-		this.collection.fetch({reset: true});
-		this.showPlaylistSongs();
-
+		var thisView = this; 
+		this.collection.fetch({reset: true, success: function() {
+			thisView.showPlaylistSongs();
+		}});
 	},
 
 	el: '#playlist',
@@ -29,7 +30,11 @@ App.Views.Playlist = Backbone.View.extend({
 
 	createPlaylist: function() {
 		var playlistName = this.$('#playlist-name-input').val();
+		if (playlistName === "") {
+			return
+		};
 		this.collection.create({name: playlistName});
+		this.collection.fetch();
 		this.$('#playlist-name-input').val('');
 	},
 
