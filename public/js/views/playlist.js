@@ -43,6 +43,7 @@ App.Views.Playlist = Backbone.View.extend({
 		App.playlistSongsView.showPlaylist(playlistId);
 		$('#expand-down').attr('id', 'collapse-up');
 		this.$('#listed-songs').show();
+		
 	},
 
 	showPlaylist: function(clicked) {
@@ -50,6 +51,7 @@ App.Views.Playlist = Backbone.View.extend({
 		this.$('#listed-songs').show();
 		$(expandTriangle).attr('id', 'collapse-up');
 
+		// Take track ids from shown playlist and show spotify plugin
 		var songIds       = [],
 			  songElArray   = this.$('.playlist-song'),
 			  pluginRootUrl =	'https://embed.spotify.com/?uri=spotify:trackset:FeaturPlaylist:';
@@ -62,7 +64,6 @@ App.Views.Playlist = Backbone.View.extend({
 			$('iframe').attr('src', pluginRootUrl + songIds.join());
 		};
 		
-
 	},
 
 	hidePlaylist: function(clicked) {
