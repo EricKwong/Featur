@@ -29,66 +29,47 @@ router.get('/:artist_id', function (req, res) {
       // Create objects linking each artist to each track they appear on
       var artistAndTrack = linkArtistsToTracks(allTracks);
 
-      function linkArtistsToTracks (allTracks) {
-        var artistAndTrack = [];
-        allTracks.forEach(function(track) {
-          track.artists.forEach(function(artist) {
-            // Format for final object to output to front end
-            var artistInfo = {
-              artistName: artist.name,
-              artistId: artist.id,
-              track: [{ trackName: track.name,
-                        trackId: track.id,
-                        trackUri: track.uri }],
-              trackNum: 1
-            };
-
-            artistAndTrack.push(artistInfo);
-          });
-        });
-
-        return artistAndTrack;
-      };
-
-
-
-
       /*
       Transform linking object array into array with one object for each artist
       Each artist object contains an array of all track objects for that artist 
       */     
-      var collabArtists = [artistAndTrack[0]];
-      for (var i = 1; i < artistAndTrack.length; i++) {
-        var artId = artistAndTrack[i].artistId;
-        var currentTrack = artistAndTrack[i].track[0];
 
-        // Retrieve ids of all artist objects already created        
-        var collabIds = collabArtists.map(function (a) {return a.artistId});
+      var collabArtists = collectTracks(artistAndTrack);
 
-        // Push collab artist to final object array if not already there
-        var artIndex = collabIds.indexOf(artId);
-        if ( artIndex === -1 ) {
-          collabArtists.push(artistAndTrack[i]);
-        } else {
-          /*
-          If collab artist is already in final object array, iterate through the track array and push each the track names into an array. Then, check name of current temp data [i] against array to eliminate same tracks having different Ids
-          */
-          var tracksAlreadyThere = collabArtists[artIndex].track.map(function (t) {return t.trackName});
-          var trackToPush = currentTrack.trackName;
-          var trackIndex = tracksAlreadyThere.indexOf(trackToPush);
-          if ( trackIndex === -1 ) {
-            collabArtists[artIndex].track.push(currentTrack);
-            // Iterate number of tracks for later sorting
-            collabArtists[artIndex].trackNum++;
+
+      function collectTracks (artistAndTrack) {
+        var collabArtists = [artistAndTrack[0]];
+        for (var i = 1; i < artistAndTrack.length; i++) {
+          var artId = artistAndTrack[i].artistId;
+          var currentTrack = artistAndTrack[i].track[0];
+          // Retrieve ids of all artist objects already created        
+          var collabIds = collabArtists.map(function (a) {return a.artistId});
+          // Push collab artist to final object array if not already there
+          var artIndex = collabIds.indexOf(artId);
+          if ( artIndex === -1 ) {
+            collabArtists.push(artistAndTrack[i]);
+          } else {
+            /* If collab artist is already in final object array, iterate through the track array and push each the track names into an array. Then check name of current temp data [i] against array to eliminate same tracks having different Ids */
+            var tracksAlreadyThere = collabArtists[artIndex].track.map(function (t) {
+              return t.trackName;
+            });
+            var trackToPush = currentTrack.trackName;
+            var trackIndex = tracksAlreadyThere.indexOf(trackToPush);
+            if ( trackIndex === -1 ) {
+              collabArtists[artIndex].track.push(currentTrack);
+              // Iterate number of tracks for later sorting
+              collabArtists[artIndex].trackNum++;
+            }
           }
-        }
-      };
+          return collabArtists;
+        };
+      }
 
-
+      
       /*      
       Request to obtain artist image URLs; Limit number of collaborators to 50 (maximum for acquiring artist data from Spotify API)
       */      
-      var collabArtists = collabArtists.slice(0,50);
+      collabArtists = collabArtists.slice(0,50);
       var collabIds = collabArtists.map(function (a) {return a.artistId});
       request({
         uri: 'https://api.spotify.com/v1/artists?ids=' + collabIds.join(),
@@ -197,6 +178,27 @@ router.get('/:artist_id', function (req, res) {
 
 
 
+
+function linkArtistsToTracks (allTracks) {
+  var artistAndTrack = [];
+  allTracks.forEach(function(track) {
+    track.artists.forEach(function(artist) {
+      // Format for final object to output to front end
+      var artistInfo = {
+        artistName: artist.name,
+        artistId: artist.id,
+        track: [{ trackName: track.name,
+                  trackId: track.id,
+                  trackUri: track.uri }],
+        trackNum: 1
+      };
+
+      artistAndTrack.push(artistInfo);
+    });
+  });
+
+  return artistAndTrack;
+};
 
 
       
